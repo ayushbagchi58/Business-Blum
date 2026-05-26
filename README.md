@@ -32,7 +32,7 @@ GitHub Profile: https://github.com/ayushbagchi58
 Clone the repository:
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/Infinanze-Technologies/businessblum.com.git>
 ```
 
 Go to the project folder:
