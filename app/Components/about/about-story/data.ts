@@ -2,22 +2,22 @@ import { StorySectionData } from "./types";
 
 export const storySectionData: StorySectionData = {
   content: {
-    sectionTag: "Our Journey",
+    sectionTag: "Our Vision",
     title: "Our Story",
 
     paragraphs: [
-      "Business Blum was born from frustration. Our founders, Sarah Chen and Michael Rodriguez, were serial entrepreneurs who had each launched multiple businesses. They knew firsthand the nightmare of trying to secure business funding.",
+      "Business Blum was built with a clear vision: to create a modern business funding company designed for ambitious entrepreneurs, growing companies, and business owners who move with purpose.",
 
-      "Sarah spent three months applying to 15 different lenders when launching her second startup. The process was exhausting: repetitive applications, conflicting requirements, and endless waiting. Michael had a similar experience — he was approved by one lender only to discover after the fact that their rates were 4% higher than what he could have gotten elsewhere.",
+      "In today's world, access to capital should feel strategic, efficient, and elevated. Traditional lending can often feel slow, outdated, and disconnected from the realities of modern business. Business Blum was created to change that experience.",
 
-      "That question led to Business Blum. The concept was simple: create one application that could match businesses with multiple lenders simultaneously, giving borrowers transparency, choice, and speed.",
+      "We specialize in premium business funding solutions tailored to help companies scale with confidence. Our clients range from emerging startups to established companies across industries such as Construction, Transportation & Trucking, Hospitality, Healthcare, Retail, Automotive, Beauty & Wellness, E-Commerce, and Professional Services.",
 
-      "We launched in 2023 with 25 lending partners and helped our first 100 businesses within a month. Today, we've grown to 200+ lending partners and have helped over 50,000 businesses access $2.5 billion in funding.",
+      "At Business Blum, we combine speed with professionalism, offering a streamlined funding experience built around transparency, communication, and long-term relationships.",
 
-      "But we're not done. Every day, we're improving our technology, expanding our lender network, and helping more businesses achieve their dreams.",
+      "For qualified businesses, funding may be available in as little as 24 hours.",
     ],
 
     quote:
-      '"There had to be a better way," Sarah said. "Why should every business owner have to go through this broken process?"',
+      '"We believe business funding should feel less transactional and more strategic. Every business has a story, a vision, and a next level. Our role is to help provide the financial foundation that supports that growth."',
   },
 };

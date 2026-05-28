@@ -2,10 +2,10 @@ import { AboutCTASectionData } from "./types";
 
 export const aboutCTASectionData: AboutCTASectionData = {
   content: {
-    heading: "Join 50,000+ Businesses We've Helped",
+    heading: "Funding Growth. Building Futures.",
 
     description:
-      "Experience the Business Blum difference. Apply now and get matched with the right lenders for your business.",
+      "To build one of the most trusted and respected business funding brands by helping entrepreneurs access the capital they need to grow, compete, and succeed at the highest level.",
 
     button: {
       label: "Start Your Application",

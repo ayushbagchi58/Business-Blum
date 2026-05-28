@@ -1,31 +1,47 @@
 import { AboutDifferentSectionData } from "./types";
 
 export const aboutDifferentSectionData: AboutDifferentSectionData = {
-  title: "What Makes Us Different",
+  title: "Our Commitment",
 
   items: [
     {
       id: 1,
-      title: "We're Not a Lender",
+      title: "Fast and Efficient Approvals",
       description:
-        "We don't lend money. We're an independent platform that works for YOU, not the lenders. This means we have no incentive to push you toward one lender over another — our only goal is finding your best match.",
+        "We understand that time is critical in business. Our streamlined process is designed to get you approved quickly, with funding available in as little as 24 hours for qualified businesses.",
       icon: "globe",
     },
 
     {
       id: 2,
-      title: "Real Business Experience",
+      title: "Personalized Funding Strategies",
       description:
-        "Our founders and leadership team aren't just tech people or finance people — they're entrepreneurs who have built and scaled businesses. They've been where you are, and that experience shapes every decision we make.",
+        "Every business is unique. We take the time to understand your specific needs and goals, then create customized funding solutions that align with your vision for growth.",
       icon: "briefcase",
     },
 
     {
       id: 3,
-      title: "Technology Meets Human Touch",
+      title: "White-Glove Client Experience",
       description:
-        "Our AI-powered matching algorithm handles the heavy lifting, but real people are always available to help. You're never just a number in our system — you're a business owner with unique needs, and we treat you that way.",
+        "From application to funding, you&apos;ll receive professional support every step of the way. We combine cutting-edge technology with personalized service to ensure a premium experience.",
       icon: "arrow",
+    },
+
+    {
+      id: 4,
+      title: "Flexible Financing Solutions",
+      description:
+        "We offer a wide range of funding options tailored to your business needs. Whether you need working capital, equipment financing, or expansion funding, we have flexible solutions that adapt to your situation.",
+      icon: "target",
+    },
+
+    {
+      id: 5,
+      title: "Professional Support from Application to Funding",
+      description:
+        "Our dedicated team guides you through every step of the funding process. From initial application to final approval, you&apos;ll have expert support ensuring a smooth and efficient experience.",
+      icon: "shield",
     },
   ],
 };

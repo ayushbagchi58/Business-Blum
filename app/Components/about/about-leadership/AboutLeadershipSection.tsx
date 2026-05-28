@@ -42,7 +42,7 @@ export default function AboutLeadershipSection() {
           </motion.p>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:mt-10 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-10 sm:grid-cols-2 sm:gap-8 lg:mx-auto lg:max-w-4xl">
           {members.map((member, index) => (
             <motion.div
               key={member.id}
@@ -63,6 +63,7 @@ export default function AboutLeadershipSection() {
                     src={member.image}
                     alt={member.name}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                 </div>

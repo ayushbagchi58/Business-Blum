@@ -1,7 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Globe, BriefcaseBusiness, ArrowUpRight } from "lucide-react";
+import {
+  Globe,
+  BriefcaseBusiness,
+  ArrowUpRight,
+  Target,
+  Shield,
+} from "lucide-react";
 
 import { aboutDifferentSectionData } from "./data";
 
@@ -9,6 +15,8 @@ const iconMap = {
   globe: Globe,
   briefcase: BriefcaseBusiness,
   arrow: ArrowUpRight,
+  target: Target,
+  shield: Shield,
 };
 
 export default function AboutDifferentSection() {

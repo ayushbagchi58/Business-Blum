@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -11,8 +12,15 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] w-full max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-[44px] w-[44px] items-center justify-center rounded-lg bg-[#009966] text-white shadow-sm">
-            <span className="text-[24px] font-bold">$</span>
+          <div className="flex h-[44px] w-[44px] items-center justify-center overflow-hidden rounded-lg bg-[#009966] shadow-sm">
+            <Image
+              src="/logos/navlogo.png"
+              alt="Business Blum Logo"
+              width={44}
+              height={44}
+              className="h-full w-full object-contain p-1"
+              priority
+            />
           </div>
 
           <div className="leading-tight">
@@ -66,7 +74,6 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           <Link
             href="/applynow"
-            type="button"
             className="hidden rounded-lg bg-[#009966] px-4 py-2 text-[13px] font-semibold text-white shadow-sm transition duration-200 hover:bg-[#007a52] md:block lg:px-5 lg:py-2.5 lg:text-[14px]"
           >
             Apply Now
@@ -131,6 +138,7 @@ const Navbar = () => {
           <Link
             href="/applynow"
             className="mt-4 rounded-lg bg-[#009966] px-5 py-3 text-[14px] font-semibold text-white shadow-sm transition hover:bg-[#007a52]"
+            onClick={() => setMobileMenuOpen(false)}
           >
             Apply Now
           </Link>

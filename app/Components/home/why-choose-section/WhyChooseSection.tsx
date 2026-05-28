@@ -58,7 +58,7 @@ export default function WhyChooseSection() {
           </h2>
 
           <p className="mt-3 text-[14px] md:text-[18px] text-slate-600">
-            We&apos;re not a lender — we&apos;re your advocate in finding the
+            We&apos;re not a lender - we&apos;re your advocate in finding the
             right one
           </p>
         </motion.div>
@@ -129,7 +129,7 @@ export default function WhyChooseSection() {
             <p className="text-[14px] md:text-[16px] leading-7 text-slate-700">
               Unlike traditional banks or direct lenders, we&apos;re a neutral
               marketplace. We don&apos;t profit from steering you toward one
-              lender over another — we succeed when you find the perfect match
+              lender over another - we succeed when you find the perfect match
               for your needs.
             </p>
 

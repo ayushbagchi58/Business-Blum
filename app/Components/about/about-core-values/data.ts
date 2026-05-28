@@ -1,52 +1,59 @@
 import { CoreValuesSectionData } from "./types";
 
 export const coreValuesSectionData: CoreValuesSectionData = {
-  badge: "Values",
-  title: "Our Core Values",
-  subtitle: "The principles that guide everything we do",
+  badge: "Our Approach",
+  title: "What We Offer",
+  subtitle: "Premium business funding solutions tailored for growth",
 
   values: [
     {
       id: 1,
       icon: "target",
-      title: "Transparency",
+      title: "Working Capital",
       description:
-        "We believe in complete honesty about our process, partnerships, and how we operate. No hidden agendas, no surprises.",
+        "Flexible financing to keep your business operations running smoothly and support day-to-day expenses.",
     },
     {
       id: 2,
       icon: "heart",
-      title: "Customer First",
+      title: "Merchant Cash Advances (MCA)",
       description:
-        "Every decision we make starts with one question: Is this best for our customers? Your success is our success.",
+        "Fast funding based on your future sales revenue, perfect for businesses with consistent card transactions.",
     },
     {
       id: 3,
       icon: "bulb",
-      title: "Innovation",
+      title: "Equipment Financing",
       description:
-        "We continuously evolve our technology and processes to make business financing simpler, faster, and more accessible.",
+        "Purchase or lease the equipment your business needs to operate and grow without depleting cash reserves.",
     },
     {
       id: 4,
       icon: "shield",
-      title: "Trust & Security",
+      title: "Expansion Funding",
       description:
-        "We treat your data like our own. Bank-level encryption, strict privacy policies, and zero tolerance for compromise.",
+        "Capital to help you scale operations, open new locations, or enter new markets with confidence.",
     },
     {
       id: 5,
       icon: "users",
-      title: "Inclusivity",
+      title: "Inventory Financing",
       description:
-        "We serve businesses of all sizes, industries, and backgrounds. Everyone deserves access to fair financing.",
+        "Stock up on inventory without cash flow concerns, ensuring you can meet customer demand.",
     },
     {
       id: 6,
       icon: "zap",
-      title: "Speed & Efficiency",
+      title: "Payroll Solutions",
       description:
-        "Time is money in business. We have optimized every step to get you matched with lenders as quickly as possible.",
+        "Ensure timely employee payments and maintain workforce stability during cash flow challenges.",
+    },
+    {
+      id: 7,
+      icon: "briefcase",
+      title: "Custom Business Funding Programs",
+      description:
+        "Tailored funding solutions designed specifically for your unique business needs and growth objectives.",
     },
   ],
 };

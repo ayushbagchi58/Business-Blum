@@ -8,6 +8,7 @@ import {
   Users,
   Target,
   Lightbulb,
+  Briefcase,
 } from "lucide-react";
 
 import { coreValuesSectionData } from "./data";
@@ -19,6 +20,7 @@ const iconMap = {
   shield: ShieldCheck,
   users: Users,
   zap: Zap,
+  briefcase: Briefcase,
 };
 
 export default function AboutCoreValuesSection() {

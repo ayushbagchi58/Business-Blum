@@ -28,7 +28,7 @@ export const statsSectionData: StatsSectionData = {
     {
       id: 4,
       value: 4.8,
-      suffix: "★",
+      suffix: "⭐",
       decimals: 1,
       title: "Customer Rating",
       subtitle: "From 12K+ Reviews",

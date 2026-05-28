@@ -1,47 +1,57 @@
 import { JourneySectionData } from "./types";
 
 export const journeySectionData: JourneySectionData = {
-  badge: "Timeline",
-  title: "Our Journey",
-  subtitle: "Milestones that shaped Business Blum",
+  badge: "Industries We Serve",
+  title: "Who We Work With",
+  subtitle: "Supporting businesses across diverse industries",
 
   timeline: [
     {
       id: 1,
-      year: "2023",
-      title: "Company Founded",
+      year: "2020",
+      title: "Construction",
       description:
-        "Business Blum launches with mission to revolutionize business lending.",
+        "Equipment, materials, and working capital for contractors and builders.",
     },
     {
       id: 2,
-      year: "2023",
-      title: "10,000 Businesses",
-      description: "Helped our first 10,000 businesses secure funding.",
+      year: "2021",
+      title: "Transportation & Trucking",
+      description: "Fleet financing, fuel costs, and operational expenses.",
     },
     {
       id: 3,
-      year: "2024",
-      title: "National Expansion",
-      description: "Expanded to all 50 states with 100+ lending partners.",
+      year: "2022",
+      title: "Hospitality",
+      description:
+        "Restaurant equipment, renovations, and seasonal cash flow support.",
     },
     {
       id: 4,
-      year: "2024",
-      title: "$1B Milestone",
-      description: "Facilitated over $1 billion in business funding.",
+      year: "2023",
+      title: "Healthcare",
+      description:
+        "Medical equipment, practice expansion, and operational funding.",
     },
     {
       id: 5,
-      year: "2025",
-      title: "Technology Advancement",
-      description: "Launched AI-powered matching algorithm.",
+      year: "2024",
+      title: "Retail & E-Commerce",
+      description: "Inventory financing, marketing, and expansion capital.",
     },
     {
       id: 6,
+      year: "2025",
+      title: "Professional Services",
+      description:
+        "Working capital, technology upgrades, and business development.",
+    },
+    {
+      id: 7,
       year: "2026",
-      title: "Industry Leader",
-      description: "50K+ businesses served, 200+ lender partnerships.",
+      title: "Beauty & Wellness",
+      description:
+        "Salon equipment, spa renovations, and inventory financing for beauty businesses.",
     },
   ],
 };

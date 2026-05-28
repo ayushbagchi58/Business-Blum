@@ -16,6 +16,7 @@ export default function ApplyNowHeroSection() {
           src={image}
           alt={heading}
           fill
+          sizes="100vw"
           priority
           className="object-cover"
         />

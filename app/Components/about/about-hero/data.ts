@@ -33,9 +33,9 @@ export const aboutSectionData: AboutSectionData = {
   ],
 
   content: {
-    title: "About Business Blum",
+    title: "Welcome to Business Blum",
     subtitle:
-      "Revolutionizing how businesses access capital through smart technology and human expertise",
+      "A modern business funding company designed for ambitious entrepreneurs, growing companies, and business owners who move with purpose.",
     badge: "Premium Business Financing Platform",
   },
 };

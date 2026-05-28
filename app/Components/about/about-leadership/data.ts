@@ -1,51 +1,31 @@
 import { LeadershipSectionData } from "./types";
 
 export const leadershipSectionData: LeadershipSectionData = {
-  badge: "Our Experts",
+  badge: "Leadership",
 
-  title: "Leadership Team",
+  title: "Meet Our Founders",
 
-  subtitle: "Meet the team driving Business Blum's mission",
+  subtitle: "Experienced leaders committed to your success",
 
   members: [
     {
       id: 1,
-      name: "Sarah Chen",
-      role: "CEO & Co-Founder",
+      name: "Derrick Aryee",
+      role: "Founder & CEO",
       description:
-        "15 years in fintech. Former VP at Goldman Sachs. MBA from Wharton.",
+        "Brings years of experience in sales, finance, business development, and client relations. His vision for Business Blum is centered around creating a modern financial brand that empowers entrepreneurs with access to smarter funding opportunities and a higher standard of service.",
       image:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
     },
 
     {
       id: 2,
-      name: "Michael Rodriguez",
-      role: "CTO & Co-Founder",
+      name: "Jeshurun Merkin",
+      role: "Founder & COO",
       description:
-        "Former lead engineer at Stripe. Built lending platforms for 10+ years.",
+        "Brings strategic insight, operational leadership, and a forward-thinking approach to business growth and financial solutions. Together, the founders share a commitment to innovation, professionalism, and building lasting relationships with clients nationwide.",
       image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-    },
-
-    {
-      id: 3,
-      name: "David Kim",
-      role: "Chief Revenue Officer",
-      description:
-        "20 years building lender partnerships. Former SVP at LendingClub.",
-      image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-    },
-
-    {
-      id: 4,
-      name: "Jessica Thompson",
-      role: "Head of Customer Success",
-      description:
-        "Customer advocate with background in small business consulting.",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
     },
   ],
 };

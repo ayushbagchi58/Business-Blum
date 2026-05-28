@@ -11,5 +11,5 @@ export const loanMatchCTASectionData: LoanMatchCTASectionData = {
     href: "/applynow",
   },
 
-  bottomText: "Free to apply • No obligation • 3-minute process",
+  bottomText: "Free to apply - No obligation - 3-minute process",
 };
