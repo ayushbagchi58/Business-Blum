@@ -104,9 +104,6 @@ export default function AboutJourneySection() {
                       isLeft ? "md:text-right" : "md:text-left"
                     }`}
                   >
-                    <p className="text-sm font-black text-[#12A56B] sm:text-base">
-                      {item.year}
-                    </p>
 
                     <h3 className="mt-1 text-[15px] font-black leading-tight text-[#071133] sm:text-base md:text-lg">
                       {item.title}

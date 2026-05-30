@@ -13,7 +13,7 @@ export const leadershipSectionData: LeadershipSectionData = {
       name: "Derrick Aryee",
       role: "Founder & CEO",
       description:
-        "Brings years of experience in sales, finance, business development, and client relations. His vision for Business Blum is centered around creating a modern financial brand that empowers entrepreneurs with access to smarter funding opportunities and a higher standard of service.",
+        "Derrick Aryee Brings years of experience in sales, finance, business development, and client relations. His vision for Business Blum is centered around creating a modern financial brand that empowers entrepreneurs with access to smarter funding opportunities and a higher standard of service.",
       image:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
     },
@@ -23,7 +23,7 @@ export const leadershipSectionData: LeadershipSectionData = {
       name: "Jeshurun Merkin",
       role: "Founder & COO",
       description:
-        "Brings strategic insight, operational leadership, and a forward-thinking approach to business growth and financial solutions. Together, the founders share a commitment to innovation, professionalism, and building lasting relationships with clients nationwide.",
+        "Jeshurun Merkin Brings strategic insight, operational leadership, and a forward-thinking approach to business growth and financial solutions. Together, the founders share a commitment to innovation, professionalism, and building lasting relationships with clients nationwide.",
       image:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
     },
