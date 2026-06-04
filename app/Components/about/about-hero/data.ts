@@ -36,6 +36,6 @@ export const aboutSectionData: AboutSectionData = {
     title: "Welcome to Business Blum",
     subtitle:
       "A modern business funding company designed for ambitious entrepreneurs, growing companies, and business owners who move with purpose.",
-    badge: "Premium Business Financing Platform",
+    badge: "Institutional Business Capital Solutions",
   },
 };

@@ -27,14 +27,23 @@ export default function SmartFundingFeatures() {
                 }}
                 viewport={{ once: true }}
                 whileHover={{
-                  y: -8,
-                  transition: { duration: 0.25 },
+                  y: -10,
+                  boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
+                  scale: 1.03
                 }}
-                className="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-xl sm:p-5 lg:p-6"
+                className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-white to-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-emerald-200 sm:p-5 lg:p-6"
               >
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-emerald-100 transition-all duration-300 group-hover:bg-emerald-500 sm:h-16 sm:w-16">
-                  <Icon className="h-7 w-7 text-emerald-600 transition-all duration-300 group-hover:text-white sm:h-8 sm:w-8" />
-                </div>
+                <motion.div 
+                  className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-50 shadow-md sm:h-16 sm:w-16"
+                  whileHover={{ 
+                    scale: 1.15, 
+                    rotate: 10,
+                    boxShadow: "0 10px 30px rgba(16, 185, 129, 0.3)"
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Icon className="h-7 w-7 text-emerald-600 transition-all duration-300 group-hover:text-emerald-700 sm:h-8 sm:w-8" />
+                </motion.div>
 
                 <h3 className="mb-3 text-base font-bold leading-snug text-slate-900 sm:text-lg lg:text-xl">
                   {item.title}

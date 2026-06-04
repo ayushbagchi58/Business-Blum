@@ -3,18 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-
-  "lint": "eslint .",
-  "lint:fix": "eslint . --fix",
-
-  "prettier:check": "prettier . --check",
-  "prettier:fix": "prettier . --write"
-},
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier:check": "prettier . --check",
+    "prettier:fix": "prettier . --write"
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
+    "critters": "^0.0.25",
     "framer-motion": "^12.39.0",
     "lucide-react": "^1.16.0",
     "next": "16.2.6",

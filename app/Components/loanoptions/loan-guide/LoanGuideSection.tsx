@@ -65,7 +65,9 @@ export default function LoanGuideSection() {
                 }}
                 viewport={{ once: true }}
                 whileHover={{
-                  y: -2,
+                  y: -5,
+                  scale: 1.01,
+                  boxShadow: "0 15px 35px rgba(15, 23, 42, 0.08)"
                 }}
                 className="
                   group
@@ -74,24 +76,27 @@ export default function LoanGuideSection() {
                   rounded-xl
                   border
                   border-slate-200
-                  bg-white
+                  bg-gradient-to-br from-white to-gray-50
                   px-4
                   py-4
                   shadow-[0_3px_14px_rgba(15,23,42,0.04)]
                   transition-all
                   duration-300
                   hover:border-emerald-100
-                  hover:shadow-[0_8px_24px_rgba(15,23,42,0.06)]
                   sm:px-5
                   sm:py-4.5
                 "
               >
                 {/* Hover Glow */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(16,185,129,0.04),transparent_40%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <motion.div 
+                  className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(16,185,129,0.04),transparent_40%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                />
 
                 <div className="relative flex items-start gap-3">
                   {/* Icon */}
-                  <div
+                  <motion.div
                     className="
                       flex
                       h-9
@@ -100,14 +105,14 @@ export default function LoanGuideSection() {
                       items-center
                       justify-center
                       rounded-lg
-                      bg-emerald-50
-                      transition-all
-                      duration-300
-                      group-hover:scale-105
+                      bg-gradient-to-br from-emerald-50 to-emerald-100
+                      shadow-sm
                     "
+                    whileHover={{ scale: 1.15, rotate: 10 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <Icon className="h-4.5 w-4.5 text-emerald-600" />
-                  </div>
+                  </motion.div>
 
                   {/* Content */}
                   <div>

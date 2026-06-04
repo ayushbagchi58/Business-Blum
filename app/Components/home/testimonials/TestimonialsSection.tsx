@@ -47,17 +47,25 @@ export default function TestimonialsSection() {
               }}
               viewport={{ once: true }}
               whileHover={{
-                y: -6,
-                transition: { duration: 0.25 },
+                y: -8,
+                boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
+                scale: 1.02
               }}
-              className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-xl"
+              className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-emerald-200"
             >
               <div className="mb-5 flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star
+                  <motion.div
                     key={i}
-                    className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                  />
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.15 + i * 0.05, duration: 0.3 }}
+                    viewport={{ once: true }}
+                  >
+                    <Star
+                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                    />
+                  </motion.div>
                 ))}
               </div>
 

@@ -27,7 +27,7 @@ export default function AboutStorySection() {
               delay: 0.15,
             }}
             viewport={{ once: true }}
-            className="h-[4px] rounded-full bg-[#0EA56B]"
+            className="h-[4px] rounded-full bg-gradient-to-r from-[#0EA56B] via-[#00d084] to-[#0EA56B] bg-[length:200%_100%] animate-[shimmer_3s_ease-in-out_infinite] shadow-md"
           />
 
           <motion.p
@@ -81,9 +81,22 @@ export default function AboutStorySection() {
                 delay: 0.4,
               }}
               viewport={{ once: true }}
-              className="rounded-xl border border-[#0EA56B]/10 bg-[#0EA56B]/5 p-4 sm:p-5"
+              whileHover={{ scale: 1.02, boxShadow: "0 15px 35px rgba(14, 165, 107, 0.15)" }}
+              className="relative overflow-hidden rounded-xl border border-[#0EA56B]/10 bg-gradient-to-br from-[#0EA56B]/5 to-[#0EA56B]/10 p-4 shadow-md transition-all duration-300 sm:p-5"
             >
-              <p className="text-lg font-black leading-relaxed text-[#071133] sm:text-xl md:text-[26px]">
+              <motion.div
+                className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-emerald-400/20 to-transparent blur-2xl"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <p className="relative z-10 text-lg font-black leading-relaxed text-[#071133] sm:text-xl md:text-[26px]">
                 {content.quote}
               </p>
             </motion.div>

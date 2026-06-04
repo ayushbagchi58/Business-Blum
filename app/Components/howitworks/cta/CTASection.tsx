@@ -56,30 +56,35 @@ export default function CTASection() {
           viewport={{ once: true }}
           className="mt-8"
         >
-          <Link
-            href={ctaData.buttonLink}
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              y: -3,
+              boxShadow: "0 25px 50px rgba(14, 167, 114, 0.4)"
+            }}
+            whileTap={{
+              scale: 0.98,
+            }}
             className="
-              group inline-flex items-center gap-2.5
-              rounded-xl bg-[#0ea472]
+              group relative overflow-hidden inline-flex items-center gap-2.5
+              rounded-xl bg-gradient-to-r from-[#0ea472] to-[#00b377]
               px-6 py-3.5 text-sm font-semibold
               text-white shadow-lg shadow-emerald-500/10
               transition-all duration-300
-              hover:bg-[#0c9467]
               sm:px-7 sm:py-4 sm:text-base
             "
           >
-            {ctaData.buttonText}
-
+            <span className="relative z-10 flex items-center gap-2.5">
+              {ctaData.buttonText}
+              <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
             <motion.div
-              animate={{ x: [0, 3, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-              }}
-            >
-              <ArrowRight size={18} />
-            </motion.div>
-          </Link>
+              className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "100%" }}
+              transition={{ duration: 0.6 }}
+            />
+          </motion.button>
         </motion.div>
       </div>
     </section>

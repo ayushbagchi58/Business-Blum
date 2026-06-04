@@ -36,8 +36,36 @@ function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
 
 export default function WhyChooseSection() {
   return (
-    <section className="w-full bg-[#f8fafc] py-8 md:py-12 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-5">
+    <section className="relative w-full bg-[#f8fafc] py-8 md:py-12 overflow-hidden">
+      {/* Animated background gradient */}
+      <motion.div
+        animate={{
+          x: [0, 50, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute right-0 top-0 h-[300px] w-[300px] rounded-full bg-gradient-to-br from-emerald-500/10 to-transparent blur-3xl"
+      />
+      <motion.div
+        animate={{
+          x: [0, -40, 0],
+          y: [0, 30, 0],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-0 left-0 h-[250px] w-[250px] rounded-full bg-gradient-to-tr from-blue-500/10 to-transparent blur-3xl"
+      />
+      
+      <div className="relative max-w-[1200px] mx-auto px-4 md:px-5">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: "100%" }}
@@ -68,9 +96,23 @@ export default function WhyChooseSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="max-w-[980px] mx-auto mt-8 md:mt-10 bg-white border border-slate-200 rounded-[18px] shadow-sm p-5 md:p-8"
+          whileHover={{ y: -5, boxShadow: "0 25px 50px rgba(0, 0, 0, 0.08)" }}
+          className="relative max-w-[980px] mx-auto mt-8 md:mt-10 bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-[18px] shadow-md p-5 md:p-8 overflow-hidden"
         >
-          <div className="grid grid-cols-3 gap-3 md:gap-6 text-center">
+          {/* Animated gradient overlay */}
+          <motion.div
+            animate={{
+              opacity: [0.3, 0.5, 0.3],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-emerald-500/20 to-transparent blur-2xl"
+          />
+          <div className="grid grid-cols-3 gap-3 md:gap-6 text-center relative z-10">
             {stats.map((item) => (
               <motion.div
                 key={item.id}

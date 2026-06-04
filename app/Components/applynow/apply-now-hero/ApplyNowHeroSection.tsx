@@ -35,14 +35,20 @@ export default function ApplyNowHeroSection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               viewport={{ once: true }}
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(44, 230, 161, 0.3)" }}
               className="
                 inline-flex items-center gap-2
                 rounded-lg border border-white/15
                 bg-white/10 px-3 py-1.5
-                backdrop-blur-md
+                backdrop-blur-md shadow-lg
               "
             >
-              <Shield className="h-3.5 w-3.5 text-[#2CE6A1]" />
+              <motion.div
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Shield className="h-3.5 w-3.5 text-[#2CE6A1]" />
+              </motion.div>
 
               <span
                 className="

@@ -8,6 +8,32 @@ export default function AboutHeroSection() {
 
   return (
     <section className="relative w-full overflow-hidden bg-[#020617] py-14 sm:py-16 lg:py-20">
+      {/* Enhanced animated gradient orbs */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute -right-20 top-0 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 blur-3xl"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.5, 0.2],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute -left-20 bottom-0 h-[350px] w-[350px] rounded-full bg-gradient-to-tr from-emerald-500/20 to-green-500/20 blur-3xl"
+      />
+      
       <div className="absolute inset-0 overflow-hidden">
         {glowOrbs.map((orb) => (
           <motion.div
@@ -40,7 +66,7 @@ export default function AboutHeroSection() {
           whileInView={{ width: "72px", opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mt-5 h-[3px] rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-emerald-400"
+          className="mt-5 h-[3px] rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-emerald-400 shadow-lg shadow-cyan-500/50"
         />
 
         <motion.p
@@ -60,13 +86,13 @@ export default function AboutHeroSection() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(16, 185, 129, 0.2)" }}
           transition={{
             duration: 0.4,
             delay: 0.25,
           }}
           viewport={{ once: true }}
-          className="mt-8 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-xl"
+          className="mt-8 rounded-full border border-white/10 bg-white/5 px-4 py-2 shadow-lg backdrop-blur-xl transition-all duration-300"
         >
           <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-[10px] font-semibold uppercase tracking-[0.2em] text-transparent sm:text-xs">
             {content.badge}

@@ -10,8 +10,17 @@ export interface ApprovalItem {
   icon: LucideIcon;
 }
 
-export interface ApplyNowApprovalSectionData {
-  heading: string;
+export interface SuccessMetric {
+  id: number;
+  label: string;
+  value: string;
+  description: string;
+}
 
+export interface ApplyNowApprovalSectionData {
+  badge?: string;
+  heading: string;
+  subtitle?: string;
+  successMetrics?: SuccessMetric[];
   approvalItems: ApprovalItem[];
 }

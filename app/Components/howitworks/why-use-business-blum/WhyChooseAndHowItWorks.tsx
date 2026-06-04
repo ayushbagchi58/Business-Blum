@@ -38,17 +38,22 @@ export default function WhyChooseAndHowItWorks() {
                 }}
                 viewport={{ once: true }}
                 whileHover={{
-                  y: -6,
-                  transition: { duration: 0.25 },
+                  y: -10,
+                  scale: 1.03,
+                  boxShadow: "0 25px 50px rgba(0, 0, 0, 0.12)"
                 }}
-                className="rounded-[18px] bg-white px-3 py-5 text-center shadow-[0_6px_20px_rgba(0,0,0,0.05)] sm:px-4 sm:py-6 md:px-5 md:py-7 lg:px-6 lg:py-8"
+                className="group rounded-[18px] bg-gradient-to-br from-white via-white to-gray-50 px-3 py-5 text-center shadow-[0_6px_20px_rgba(0,0,0,0.05)] sm:px-4 sm:py-6 md:px-5 md:py-7 lg:px-6 lg:py-8"
               >
-                <div className="mx-auto flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-[#dff5e8] sm:h-[60px] sm:w-[60px] md:h-[68px] md:w-[68px]">
+                <motion.div 
+                  className="mx-auto flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-gradient-to-br from-[#dff5e8] to-[#c8f0dd] shadow-md sm:h-[60px] sm:w-[60px] md:h-[68px] md:w-[68px]"
+                  whileHover={{ scale: 1.15, rotate: 10 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <Icon
-                    className="h-5 w-5 text-[#0d9b68] sm:h-6 sm:w-6 md:h-7 md:w-7"
+                    className="h-5 w-5 text-[#0d9b68] transition-colors duration-300 group-hover:text-[#0a7d54] sm:h-6 sm:w-6 md:h-7 md:w-7"
                     strokeWidth={2}
                   />
-                </div>
+                </motion.div>
 
                 <h3 className="mt-4 text-[13px] font-extrabold leading-tight text-[#081228] sm:text-[16px] md:text-[20px] lg:text-[24px]">
                   {item.title}

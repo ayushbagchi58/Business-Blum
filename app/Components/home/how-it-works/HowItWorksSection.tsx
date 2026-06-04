@@ -56,20 +56,33 @@ const HowItWorksSection = () => {
                   delay: index * 0.15,
                 }}
                 viewport={{ once: true }}
-                className="relative z-10 rounded-xl border border-gray-100 bg-[#f8f8f8] p-3 shadow-[0_4px_12px_rgba(0,0,0,0.07)] transition hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.10)] sm:p-4 md:p-5"
+                whileHover={{ 
+                  y: -8, 
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.12)",
+                  scale: 1.02
+                }}
+                className="group relative z-10 rounded-xl border border-gray-100 bg-gradient-to-br from-white to-[#f8f8f8] p-3 shadow-[0_4px_12px_rgba(0,0,0,0.07)] transition-all duration-300 sm:p-4 md:p-5"
               >
-                {/* Top Border */}
-                <div className="absolute left-0 top-0 h-[4px] w-full rounded-t-xl bg-[#0ea76b]" />
+                {/* Top Border with gradient */}
+                <div className="absolute left-0 top-0 h-[4px] w-full rounded-t-xl bg-gradient-to-r from-[#0ea76b] via-[#00d084] to-[#0ea76b] bg-[length:200%_100%] animate-[shimmer_3s_ease-in-out_infinite]" />
 
                 {/* Step Number */}
-                <div className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#0ea76b] text-[12px] font-bold text-white shadow-sm sm:h-8 sm:w-8 sm:text-[14px]">
+                <motion.div 
+                  className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#0ea76b] to-[#00b377] text-[12px] font-bold text-white shadow-lg sm:h-8 sm:w-8 sm:text-[14px]"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.5 }}
+                >
                   {step.id}
-                </div>
+                </motion.div>
 
                 {/* Icon */}
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#dff5ea] text-[#0ea76b] sm:h-12 sm:w-12">
+                <motion.div 
+                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#dff5ea] to-[#c8f0dd] text-[#0ea76b] shadow-sm sm:h-12 sm:w-12"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <Icon size={20} strokeWidth={2.2} />
-                </div>
+                </motion.div>
 
                 {/* Content */}
                 <div className="mt-4">

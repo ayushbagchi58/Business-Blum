@@ -5,30 +5,30 @@ import { FeatureCardType } from "./types";
 export const features: FeatureCardType[] = [
   {
     id: "precision-matching",
-    title: "Precision Matching",
+    title: "AI-Powered Precision Matching",
     description:
-      "We use advanced algorithms to connect you with lenders that truly fit your unique financial profile and needs.",
+      "Proprietary machine learning algorithms analyze 200+ data points to connect you with optimal institutional lending partners. Our technology processes applications in real-time, evaluating compatibility across multiple dimensions.",
     icon: Target,
   },
   {
     id: "customer-first",
-    title: "Customer-First Approach",
+    title: "Enterprise-Grade Platform",
     description:
-      "Every feature we build is designed with one goal: making your loan search easier, faster, and more transparent.",
+      "Built on scalable cloud infrastructure designed for high-volume transactions. Every feature reflects institutional standards: security, reliability, and performance at enterprise scale.",
     icon: Heart,
   },
   {
     id: "lightning-fast",
-    title: "Lightning Fast",
+    title: "Real-Time Processing",
     description:
-      "Our streamlined platform delivers lender matches in minutes, not days. Speed matters when you need funding.",
+      "Advanced automation delivers institutional-grade matching in minutes. Our distributed architecture handles thousands of concurrent applications with sub-second response times.",
     icon: Zap,
   },
   {
     id: "bank-security",
-    title: "Bank-Level Security",
+    title: "Bank-Level Security & Compliance",
     description:
-      "Your financial data is protected with the same encryption standards used by major financial institutions.",
+      "SOC 2 Type II certified infrastructure with 256-bit encryption, multi-factor authentication, and continuous security monitoring. Your data is protected by enterprise-grade protocols.",
     icon: Shield,
   },
 ];

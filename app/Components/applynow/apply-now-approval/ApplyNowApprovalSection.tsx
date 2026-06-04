@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { applyNowApprovalSectionData } from "./data";
 
 export default function ApplyNowApprovalSection() {
-  const { heading, approvalItems } = applyNowApprovalSectionData;
+  const { badge, heading, subtitle, successMetrics, approvalItems } = applyNowApprovalSectionData;
 
   return (
     <section className="w-full bg-[#f3f5f7] py-6 sm:py-8 lg:py-10">
@@ -72,6 +72,20 @@ export default function ApplyNowApprovalSection() {
           </div>
 
           <div className="relative z-10">
+            {badge && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="mb-4 text-center"
+              >
+                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#009966] to-[#00b377] px-4 py-2 text-xs font-semibold text-white">
+                  {badge}
+                </span>
+              </motion.div>
+            )}
+
             <motion.h2
               initial={{
                 opacity: 0,
@@ -96,9 +110,52 @@ export default function ApplyNowApprovalSection() {
               {heading}
             </motion.h2>
 
+            {subtitle && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="mt-3 text-center text-sm text-gray-600 sm:text-base"
+              >
+                {subtitle}
+              </motion.p>
+            )}
+
+            {successMetrics && successMetrics.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3"
+              >
+                {successMetrics.map((metric, index) => (
+                  <motion.div
+                    key={metric.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                    className="rounded-xl border border-[#0EA56B]/20 bg-gradient-to-br from-[#ecfdf3] to-white p-4 text-center"
+                  >
+                    <p className="text-3xl font-black text-[#0EA56B] sm:text-4xl">
+                      {metric.label}
+                    </p>
+                    <p className="mt-2 text-sm font-bold text-[#071133]">
+                      {metric.value}
+                    </p>
+                    <p className="mt-1 text-xs text-gray-600">
+                      {metric.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+
             <div
               className="
-                mt-6 grid grid-cols-1
+                mt-8 grid grid-cols-1
                 gap-x-6 gap-y-5
                 md:grid-cols-2
               "

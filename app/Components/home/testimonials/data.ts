@@ -4,31 +4,31 @@ export const testimonials: TestimonialType[] = [
   {
     id: 1,
     name: "Sarah Martinez",
-    role: "Small Business Owner, Martinez Bakery",
+    role: "Principal, Martinez Bakery",
     location: "Austin, TX",
     image:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400",
     review:
-      "Business Blum made finding the right loan so easy. I applied online, got matched with several lenders, and found the perfect option for my needs. Highly recommend!",
+      "Business Blum provided sophisticated capital matching for our expansion. The application process was seamless, and we secured optimal terms for our business model. Their professional approach exceeded expectations.",
   },
   {
     id: 2,
     name: "Michael Chen",
-    role: "Entrepreneur, Chen Consulting",
+    role: "CEO, Chen Consulting",
     location: "Los Angeles, CA",
     image:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400",
     review:
-      "The application process was quick and simple. Within minutes, I was matched with lenders that actually fit my financial profile. No hassle, no stress.",
+      "After traditional banking channels proved inflexible, Business Blum connected us with institutional partners who understood our growth trajectory. The precision of their matching process was remarkable.",
   },
   {
     id: 3,
     name: "Jessica Thompson",
-    role: "Freelancer, Independent Professional",
+    role: "Managing Director, Thompson Consulting",
     location: "Seattle, WA",
     image:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400",
     review:
-      "I needed emergency funding fast. Business Blum connected me with lenders who could help immediately. The platform saved me so much time and effort.",
+      "When critical equipment financing was required on short notice, Business Blum delivered strategic capital solutions efficiently. Their responsiveness and professionalism were exemplary.",
   },
 ];

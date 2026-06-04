@@ -6,3 +6,6 @@ export { default as LoanHeroSection } from "./loan-hero";
 export { default as SmartFundingFeatures } from "./smart-funding-features";
 export { default as TestimonialsSection } from "./testimonials";
 export { default as WhyChooseSection } from "./why-choose-section";
+export { ReviewsSection } from "./reviews-section";
+export { PlatformMetricsSection } from "./platform-metrics";
+export { MediaMentionsSection } from "./media-mentions";

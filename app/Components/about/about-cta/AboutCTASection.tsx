@@ -73,40 +73,28 @@ export default function AboutCTASection() {
           viewport={{ once: true }}
           className="mt-7 sm:mt-8"
         >
-          <motion.div
+          <motion.button
             whileHover={{
-              scale: 1.02,
-              y: -1,
+              scale: 1.05,
+              y: -2,
+              boxShadow: "0 20px 40px rgba(14, 167, 114, 0.3)"
             }}
             whileTap={{
               scale: 0.98,
             }}
+            className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#0ea472] to-[#00b377] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-500/10 transition-all duration-300 sm:px-6 sm:py-3.5"
           >
-            <Link
-              href={content.button.href}
-              className="
-                group inline-flex items-center gap-2.5
-                rounded-xl bg-[#0ea472]
-                px-5 py-3 text-sm font-semibold
-                text-white shadow-lg shadow-emerald-500/10
-                transition-all duration-300
-                hover:bg-[#0c9467]
-                sm:px-6 sm:py-3.5
-              "
-            >
+            <span className="relative z-10 flex items-center gap-2.5">
               {content.button.label}
-
-              <motion.div
-                animate={{ x: [0, 3, 0] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                }}
-              >
-                <ArrowRight size={17} />
-              </motion.div>
-            </Link>
-          </motion.div>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "100%" }}
+              transition={{ duration: 0.6 }}
+            />
+          </motion.button>
         </motion.div>
       </div>
     </section>

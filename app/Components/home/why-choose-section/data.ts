@@ -4,17 +4,17 @@ export const stats: StatsType[] = [
   {
     id: "businesses-helped",
     number: "50K+",
-    label: "Businesses Helped",
+    label: "Active Enterprises",
   },
   {
     id: "lending-partners",
     number: "200+",
-    label: "Lending Partners",
+    label: "Institutional Partners",
   },
   {
     id: "average-rating",
     number: "4.8",
-    label: "Average Rating",
+    label: "Platform Rating",
     icon: true,
   },
 ];

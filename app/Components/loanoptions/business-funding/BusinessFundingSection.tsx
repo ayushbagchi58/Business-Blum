@@ -11,7 +11,18 @@ export default function BusinessFundingSection() {
   return (
     <section className="relative w-full overflow-hidden bg-[#020817]">
       <div className="absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-[120px]" />
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-[120px]"
+        />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.06),transparent_60%)]" />
 
@@ -99,7 +110,8 @@ export default function BusinessFundingSection() {
                   duration: 0.4,
                 }}
                 whileHover={{
-                  scale: 1.02,
+                  scale: 1.05,
+                  boxShadow: "0 0 20px rgba(16, 185, 129, 0.4)"
                 }}
                 className="
                   group
@@ -118,9 +130,13 @@ export default function BusinessFundingSection() {
                   md:px-4
                 "
               >
-                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 transition-all duration-300 group-hover:shadow-[0_0_14px_rgba(16,185,129,0.28)]">
+                <motion.div 
+                  className="flex h-6 w-6 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 transition-all duration-300 group-hover:shadow-[0_0_14px_rgba(16,185,129,0.28)]"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                </div>
+                </motion.div>
 
                 <span
                   className="

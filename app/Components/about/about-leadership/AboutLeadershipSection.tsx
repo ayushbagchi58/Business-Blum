@@ -64,11 +64,11 @@ export default function AboutLeadershipSection() {
                     alt={member.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071133]/90 via-[#071133]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#071133]/90 via-[#071133]/20 to-transparent transition-opacity duration-300 group-hover:from-[#071133]/95" />
 
                 <div className="absolute bottom-0 left-0 w-full p-3 sm:p-4">
                   <h3 className="text-sm font-black leading-tight text-white sm:text-lg md:text-[20px]">

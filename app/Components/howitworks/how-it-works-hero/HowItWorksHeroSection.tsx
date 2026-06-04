@@ -8,6 +8,32 @@ export default function HowItWorksHero() {
 
   return (
     <section className="relative flex min-h-[240px] w-full items-center justify-center overflow-hidden bg-[#020b22] px-4 py-10 sm:min-h-[280px] sm:px-6 lg:min-h-[320px] lg:px-8">
+      {/* Enhanced animated gradient orbs */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute -right-20 top-0 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-emerald-500/20 to-transparent blur-3xl"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.5, 0.2],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute -left-20 bottom-0 h-[350px] w-[350px] rounded-full bg-gradient-to-tr from-blue-500/20 to-transparent blur-3xl"
+      />
+      
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.18),transparent_55%)]" />
 
       <motion.div

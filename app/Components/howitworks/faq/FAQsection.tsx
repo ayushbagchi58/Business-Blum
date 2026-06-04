@@ -16,7 +16,18 @@ export default function FAQsection() {
     >
       <div className="absolute left-0 top-0 h-52 w-52 rounded-full bg-emerald-200/20 blur-3xl" />
 
-      <div className="absolute bottom-0 right-0 h-52 w-52 rounded-full bg-cyan-200/10 blur-3xl" />
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-0 right-0 h-52 w-52 rounded-full bg-cyan-200/10 blur-3xl"
+      />
 
       <div className="relative mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div

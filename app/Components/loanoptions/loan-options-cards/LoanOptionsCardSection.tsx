@@ -71,7 +71,9 @@ export default function LoanOptionsSection() {
                 }}
                 viewport={{ once: true }}
                 whileHover={{
-                  y: -4,
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: "0 20px 40px rgba(15, 23, 42, 0.12)"
                 }}
                 className="
                   group
@@ -80,17 +82,16 @@ export default function LoanOptionsSection() {
                   rounded-[18px]
                   border
                   border-slate-200
-                  bg-white
+                  bg-gradient-to-br from-white to-gray-50
                   shadow-[0_3px_14px_rgba(15,23,42,0.05)]
                   transition-all
                   duration-300
-                  hover:shadow-[0_10px_24px_rgba(15,23,42,0.08)]
                 "
               >
-                <div className="h-[4px] w-full bg-gradient-to-r from-emerald-500 to-emerald-600" />
+                <div className="h-[4px] w-full bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500 bg-[length:200%_100%] animate-[shimmer_3s_ease-in-out_infinite]" />
 
                 <div className="p-3.5 sm:p-4">
-                  <div
+                  <motion.div
                     className="
                       flex
                       h-10
@@ -98,16 +99,16 @@ export default function LoanOptionsSection() {
                       items-center
                       justify-center
                       rounded-xl
-                      bg-emerald-50
-                      transition-all
-                      duration-300
-                      group-hover:scale-105
+                      bg-gradient-to-br from-emerald-50 to-emerald-100
+                      shadow-sm
                       sm:h-11
                       sm:w-11
                     "
+                    whileHover={{ scale: 1.15, rotate: 10 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <Icon className="h-5 w-5 text-emerald-600 sm:h-5.5 sm:w-5.5" />
-                  </div>
+                  </motion.div>
 
                   <h3
                     className="

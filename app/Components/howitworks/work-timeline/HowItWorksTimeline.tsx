@@ -11,7 +11,7 @@ export default function HowItWorksTimeline() {
         <div className="relative">
           <div
             className="
-              absolute top-0 h-full w-[1.5px] bg-[#36d39a]/50
+              absolute top-0 h-full w-[1.5px] bg-gradient-to-b from-[#36d39a]/60 via-[#36d39a]/40 to-[#36d39a]/60
               left-[18px]
               lg:left-1/2 lg:-translate-x-1/2
             "
@@ -36,11 +36,13 @@ export default function HowItWorksTimeline() {
                   lg:${isLeft ? "justify-start" : "justify-end"}
                 `}
               >
-                <div
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: 360 }}
+                  transition={{ duration: 0.5 }}
                   className="
                     absolute z-20 flex h-9 w-9 flex-shrink-0
                     items-center justify-center rounded-full
-                    bg-[#10b981] text-xs font-bold text-white shadow-md
+                    bg-gradient-to-br from-[#10b981] to-[#059669] text-xs font-bold text-white shadow-lg
                  
                     left-[18px] -translate-x-1/2
                     
@@ -48,12 +50,13 @@ export default function HowItWorksTimeline() {
                   "
                 >
                   {step.id}
-                </div>
+                </motion.div>
 
                 <motion.div
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -8, scale: 1.02, boxShadow: "0 20px 40px rgba(0, 0, 0, 0.12)" }}
+                  transition={{ duration: 0.3 }}
                   className={`
-                    rounded-xl bg-white p-5 shadow-lg transition
+                    rounded-xl bg-gradient-to-br from-white to-gray-50 p-5 shadow-lg
 
                     
                     ml-12 w-[calc(100%-3rem)]
@@ -68,9 +71,13 @@ export default function HowItWorksTimeline() {
                     ${index === 0 ? "-translate-y-20 lg:-translate-y-20" : ""}
                   `}
                 >
-                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#dff7ec]">
+                  <motion.div 
+                    className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-[#dff7ec] to-[#c8f0dd] shadow-sm"
+                    whileHover={{ scale: 1.15, rotate: 10 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <Icon className="text-[#10b981]" size={18} />
-                  </div>
+                  </motion.div>
 
                   <h3 className="mb-2 text-base font-bold text-[#111827] sm:text-lg">
                     {step.title}
