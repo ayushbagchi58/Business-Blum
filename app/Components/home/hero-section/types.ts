@@ -24,6 +24,4 @@ export interface HeroDataType {
   buttons: ButtonType[];
 
   features: FeatureType[];
-
-  features: FeatureType[];
 }
