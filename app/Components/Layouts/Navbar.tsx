@@ -16,7 +16,7 @@ const Navbar = () => {
         <Link href="/" className="flex items-center gap-2.5">
           <div className="flex h-[44px] w-[44px] items-center justify-center overflow-hidden rounded-lg bg-[#009966] shadow-sm">
             <Image
-              src="/logos/navlogo.png"
+              src="/Logos/navlogo.png"
               alt="Business Blum Logo"
               width={44}
               height={44}

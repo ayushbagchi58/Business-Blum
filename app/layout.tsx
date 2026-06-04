@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Business Blum",
   description: "Smart Loan Matching",
   icons: {
-    icon: "/logos/navlogo.png",
+    icon: "/Logos/navlogo.png",
   },
 };
 
