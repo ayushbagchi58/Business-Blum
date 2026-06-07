@@ -14,13 +14,13 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md shadow-sm transition-shadow duration-300 hover:shadow-md">
       <div className="mx-auto flex h-[72px] w-full max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-[44px] w-[44px] items-center justify-center overflow-hidden rounded-lg bg-[#009966] shadow-sm">
+          <div className="flex h-[60px] w-[60px] items-center justify-center overflow-hidden">
             <Image
               src="/Logos/navlogo.png"
               alt="Business Blum Logo"
-              width={44}
-              height={44}
-              className="h-full w-full object-contain p-1"
+              width={60}
+              height={60}
+              className="h-full w-full object-contain"
               priority
             />
           </div>
