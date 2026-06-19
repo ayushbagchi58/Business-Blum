@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -77,7 +76,7 @@ export default function AboutCTASection() {
             whileHover={{
               scale: 1.05,
               y: -2,
-              boxShadow: "0 20px 40px rgba(14, 167, 114, 0.3)"
+              boxShadow: "0 20px 40px rgba(14, 167, 114, 0.3)",
             }}
             whileTap={{
               scale: 0.98,

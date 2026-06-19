@@ -83,7 +83,7 @@ export default function LoanMatchCTASection() {
             whileHover={{
               scale: 1.05,
               y: -3,
-              boxShadow: "0 25px 50px rgba(14, 167, 114, 0.4)"
+              boxShadow: "0 25px 50px rgba(14, 167, 114, 0.4)",
             }}
             whileTap={{
               scale: 0.98,
@@ -114,7 +114,10 @@ export default function LoanMatchCTASection() {
           >
             <span className="relative z-10 flex items-center gap-2.5">
               {button.label}
-              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight
+                size={16}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </span>
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"

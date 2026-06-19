@@ -29,16 +29,16 @@ export default function SmartFundingFeatures() {
                 whileHover={{
                   y: -10,
                   boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
-                  scale: 1.03
+                  scale: 1.03,
                 }}
                 className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-white to-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-emerald-200 sm:p-5 lg:p-6"
               >
-                <motion.div 
+                <motion.div
                   className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-50 shadow-md sm:h-16 sm:w-16"
-                  whileHover={{ 
-                    scale: 1.15, 
+                  whileHover={{
+                    scale: 1.15,
                     rotate: 10,
-                    boxShadow: "0 10px 30px rgba(16, 185, 129, 0.3)"
+                    boxShadow: "0 10px 30px rgba(16, 185, 129, 0.3)",
                   }}
                   transition={{ duration: 0.3 }}
                 >

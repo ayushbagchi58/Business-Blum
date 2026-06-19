@@ -64,7 +64,7 @@ export default function WhyChooseSection() {
         }}
         className="absolute bottom-0 left-0 h-[250px] w-[250px] rounded-full bg-gradient-to-tr from-blue-500/10 to-transparent blur-3xl"
       />
-      
+
       <div className="relative max-w-[1200px] mx-auto px-4 md:px-5">
         <motion.div
           initial={{ width: 0 }}

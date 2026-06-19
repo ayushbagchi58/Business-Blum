@@ -73,7 +73,7 @@ export default function LoanOptionsSection() {
                 whileHover={{
                   y: -8,
                   scale: 1.02,
-                  boxShadow: "0 20px 40px rgba(15, 23, 42, 0.12)"
+                  boxShadow: "0 20px 40px rgba(15, 23, 42, 0.12)",
                 }}
                 className="
                   group

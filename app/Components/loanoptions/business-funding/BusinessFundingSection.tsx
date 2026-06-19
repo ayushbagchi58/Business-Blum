@@ -111,7 +111,7 @@ export default function BusinessFundingSection() {
                 }}
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: "0 0 20px rgba(16, 185, 129, 0.4)"
+                  boxShadow: "0 0 20px rgba(16, 185, 129, 0.4)",
                 }}
                 className="
                   group
@@ -130,7 +130,7 @@ export default function BusinessFundingSection() {
                   md:px-4
                 "
               >
-                <motion.div 
+                <motion.div
                   className="flex h-6 w-6 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-400/10 transition-all duration-300 group-hover:shadow-[0_0_14px_rgba(16,185,129,0.28)]"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}

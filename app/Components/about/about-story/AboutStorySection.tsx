@@ -81,7 +81,10 @@ export default function AboutStorySection() {
                 delay: 0.4,
               }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.02, boxShadow: "0 15px 35px rgba(14, 165, 107, 0.15)" }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: "0 15px 35px rgba(14, 165, 107, 0.15)",
+              }}
               className="relative overflow-hidden rounded-xl border border-[#0EA56B]/10 bg-gradient-to-br from-[#0EA56B]/5 to-[#0EA56B]/10 p-4 shadow-md transition-all duration-300 sm:p-5"
             >
               <motion.div

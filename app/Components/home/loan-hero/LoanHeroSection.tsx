@@ -141,7 +141,9 @@ export default function LoanHeroSection() {
           }}
           className="mt-4 max-w-xl text-sm leading-relaxed text-white/75 sm:text-base"
         >
-          Complete your application in minutes. Get matched with 200+ trusted lenders. Approvals in as little as 24 hours. No obligation consultation.
+          Complete your application in minutes. Get matched with 200+ trusted
+          lenders. Approvals in as little as 24 hours. No obligation
+          consultation.
         </motion.p>
 
         <motion.div
@@ -163,7 +165,7 @@ export default function LoanHeroSection() {
             whileHover={{
               scale: 1.05,
               y: -3,
-              boxShadow: "0 25px 50px rgba(16, 185, 129, 0.4)"
+              boxShadow: "0 25px 50px rgba(16, 185, 129, 0.4)",
             }}
             whileTap={{
               scale: 0.97,
@@ -198,7 +200,7 @@ export default function LoanHeroSection() {
           }}
           className="mt-10 flex flex-col items-center gap-4 text-white/85 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-7"
         >
-          <motion.div 
+          <motion.div
             className="flex items-center gap-2"
             whileHover={{ scale: 1.05, x: 3 }}
             transition={{ duration: 0.2 }}
@@ -212,7 +214,7 @@ export default function LoanHeroSection() {
             <span className="text-sm">No credit impact</span>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="flex items-center gap-2"
             whileHover={{ scale: 1.05, x: 3 }}
             transition={{ duration: 0.2 }}
@@ -226,7 +228,7 @@ export default function LoanHeroSection() {
             <span className="text-sm">100% secure</span>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="flex items-center gap-2"
             whileHover={{ scale: 1.05, x: 3 }}
             transition={{ duration: 0.2 }}

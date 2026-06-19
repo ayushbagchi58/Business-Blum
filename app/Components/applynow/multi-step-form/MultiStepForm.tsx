@@ -71,7 +71,8 @@ export default function MultiStepForm() {
     if (step === 3) {
       if (!formData.ein) newErrors.ein = "Required";
       if (!formData.businessAddress) newErrors.businessAddress = "Required";
-      if (!formData.businessEntityType) newErrors.businessEntityType = "Required";
+      if (!formData.businessEntityType)
+        newErrors.businessEntityType = "Required";
     }
 
     if (step === 4) {
@@ -105,7 +106,9 @@ export default function MultiStepForm() {
   const handleSubmit = () => {
     console.log("Form submitted:", formData);
     // Here you would send the data to your backend
-    alert("Application submitted successfully! We'll contact you within 24 hours.");
+    alert(
+      "Application submitted successfully! We'll contact you within 24 hours."
+    );
   };
 
   return (
@@ -115,10 +118,7 @@ export default function MultiStepForm() {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             {steps.map((step, index) => (
-              <div
-                key={step.id}
-                className="flex flex-1 flex-col items-center"
-              >
+              <div key={step.id} className="flex flex-1 flex-col items-center">
                 <div className="relative flex w-full items-center">
                   {/* Circle */}
                   <div
@@ -126,8 +126,8 @@ export default function MultiStepForm() {
                       currentStep > step.id
                         ? "border-[#0EA56B] bg-[#0EA56B]"
                         : currentStep === step.id
-                        ? "border-[#0EA56B] bg-white"
-                        : "border-gray-300 bg-white"
+                          ? "border-[#0EA56B] bg-white"
+                          : "border-gray-300 bg-white"
                     }`}
                   >
                     {currentStep > step.id ? (
@@ -159,7 +159,9 @@ export default function MultiStepForm() {
                 <div className="mt-2 hidden text-center sm:block">
                   <p
                     className={`text-xs font-semibold ${
-                      currentStep >= step.id ? "text-[#08122E]" : "text-gray-400"
+                      currentStep >= step.id
+                        ? "text-[#08122E]"
+                        : "text-gray-400"
                     }`}
                   >
                     {step.name}

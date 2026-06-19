@@ -7,7 +7,8 @@ const mediaMentions = [
   {
     id: 1,
     publication: "Forbes",
-    quote: "Business Blum is revolutionizing SMB capital access with institutional-grade matching technology",
+    quote:
+      "Business Blum is revolutionizing SMB capital access with institutional-grade matching technology",
     author: "Financial Innovation Desk",
     year: "2025",
     category: "FinTech Innovation",
@@ -15,7 +16,8 @@ const mediaMentions = [
   {
     id: 2,
     publication: "TechCrunch",
-    quote: "Their AI-powered platform is democratizing business financing at unprecedented scale",
+    quote:
+      "Their AI-powered platform is democratizing business financing at unprecedented scale",
     author: "Enterprise Technology",
     year: "2025",
     category: "Platform Economy",
@@ -23,7 +25,8 @@ const mediaMentions = [
   {
     id: 3,
     publication: "The Wall Street Journal",
-    quote: "Setting new standards for transparent, efficient business capital matching",
+    quote:
+      "Setting new standards for transparent, efficient business capital matching",
     author: "Small Business Journal",
     year: "2026",
     category: "Market Leadership",
@@ -31,7 +34,8 @@ const mediaMentions = [
   {
     id: 4,
     publication: "Inc. Magazine",
-    quote: "Fastest-growing capital matching platform serving American small businesses",
+    quote:
+      "Fastest-growing capital matching platform serving American small businesses",
     author: "Growth 500",
     year: "2025",
     category: "Rapid Growth",
@@ -86,7 +90,8 @@ export default function MediaMentionsSection() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600 sm:text-lg">
-            Recognized by industry leaders for platform innovation and market impact
+            Recognized by industry leaders for platform innovation and market
+            impact
           </p>
         </motion.div>
 
@@ -114,11 +119,15 @@ export default function MediaMentionsSection() {
               {/* Attribution */}
               <div className="flex items-center justify-between border-t border-slate-200 pt-4">
                 <div>
-                  <p className="font-bold text-slate-900">{mention.publication}</p>
+                  <p className="font-bold text-slate-900">
+                    {mention.publication}
+                  </p>
                   <p className="text-sm text-slate-600">{mention.author}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-medium text-emerald-600">{mention.category}</p>
+                  <p className="text-xs font-medium text-emerald-600">
+                    {mention.category}
+                  </p>
                   <p className="text-xs text-slate-500">{mention.year}</p>
                 </div>
               </div>
@@ -139,7 +148,8 @@ export default function MediaMentionsSection() {
               Awards & Industry Recognition
             </h3>
             <p className="text-slate-300">
-              Honored for innovation, growth, and excellence in financial services
+              Honored for innovation, growth, and excellence in financial
+              services
             </p>
           </div>
 
@@ -168,8 +178,12 @@ export default function MediaMentionsSection() {
                     />
                   </svg>
                 </div>
-                <h4 className="mb-2 font-bold text-white">{recognition.award}</h4>
-                <p className="mb-1 text-sm text-emerald-300">{recognition.category}</p>
+                <h4 className="mb-2 font-bold text-white">
+                  {recognition.award}
+                </h4>
+                <p className="mb-1 text-sm text-emerald-300">
+                  {recognition.category}
+                </p>
                 <p className="text-xs text-slate-400">{recognition.year}</p>
               </motion.div>
             ))}

@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { applyNowApprovalSectionData } from "./data";
 
 export default function ApplyNowApprovalSection() {
-  const { badge, heading, subtitle, successMetrics, approvalItems } = applyNowApprovalSectionData;
+  const { badge, heading, subtitle, successMetrics, approvalItems } =
+    applyNowApprovalSectionData;
 
   return (
     <section className="w-full bg-[#f3f5f7] py-6 sm:py-8 lg:py-10">

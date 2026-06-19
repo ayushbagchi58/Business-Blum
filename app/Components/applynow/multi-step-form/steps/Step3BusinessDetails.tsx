@@ -59,7 +59,9 @@ export default function Step3BusinessDetails({
           <input
             type="text"
             value={formData.businessAddress}
-            onChange={(e) => updateFormData({ businessAddress: e.target.value })}
+            onChange={(e) =>
+              updateFormData({ businessAddress: e.target.value })
+            }
             placeholder="123 Main St, City, State, ZIP"
             className={`
               h-12 w-full rounded-xl border bg-white px-4
@@ -71,7 +73,9 @@ export default function Step3BusinessDetails({
             `}
           />
           {errors.businessAddress && (
-            <p className="mt-1 text-xs text-red-500">{errors.businessAddress}</p>
+            <p className="mt-1 text-xs text-red-500">
+              {errors.businessAddress}
+            </p>
           )}
         </div>
 
@@ -83,7 +87,9 @@ export default function Step3BusinessDetails({
           </label>
           <select
             value={formData.businessEntityType}
-            onChange={(e) => updateFormData({ businessEntityType: e.target.value })}
+            onChange={(e) =>
+              updateFormData({ businessEntityType: e.target.value })
+            }
             className={`
               h-12 w-full rounded-xl border bg-white px-4
               text-sm text-[#08122E] outline-none
@@ -101,7 +107,9 @@ export default function Step3BusinessDetails({
             <option value="Non-Profit">Non-Profit</option>
           </select>
           {errors.businessEntityType && (
-            <p className="mt-1 text-xs text-red-500">{errors.businessEntityType}</p>
+            <p className="mt-1 text-xs text-red-500">
+              {errors.businessEntityType}
+            </p>
           )}
         </div>
 
@@ -113,7 +121,9 @@ export default function Step3BusinessDetails({
           </label>
           <select
             value={formData.estimatedCreditScore}
-            onChange={(e) => updateFormData({ estimatedCreditScore: e.target.value })}
+            onChange={(e) =>
+              updateFormData({ estimatedCreditScore: e.target.value })
+            }
             className="
               h-12 w-full rounded-xl border border-gray-300 bg-white px-4
               text-sm text-[#08122E] outline-none
@@ -134,8 +144,9 @@ export default function Step3BusinessDetails({
         {/* Trust Message */}
         <div className="mt-6 rounded-xl bg-gradient-to-br from-green-50 to-green-100/50 p-4">
           <p className="text-xs text-gray-700">
-            <span className="font-semibold text-[#0EA56B]">✓ Almost Done!</span> - 
-            One more step and we'll match you with lenders ready to fund your business.
+            <span className="font-semibold text-[#0EA56B]">✓ Almost Done!</span>{" "}
+            - One more step and we'll match you with lenders ready to fund your
+            business.
           </p>
         </div>
 

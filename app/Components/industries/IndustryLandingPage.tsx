@@ -3,9 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import { 
-  ArrowRight, 
-  CheckCircle, 
+import {
+  ArrowRight,
+  CheckCircle,
   Shield,
   HardHat,
   Truck,
@@ -22,7 +22,7 @@ import {
   AlertCircle,
   Car,
   ChevronDown,
-  LucideIcon
+  LucideIcon,
 } from "lucide-react";
 import { IndustryPageData } from "./types";
 
@@ -49,11 +49,13 @@ const iconMap: Record<string, LucideIcon> = {
   Car,
 };
 
-export default function IndustryLandingPage({ data }: IndustryLandingPageProps) {
+export default function IndustryLandingPage({
+  data,
+}: IndustryLandingPageProps) {
   const { hero, benefits, howItWorks, requirements, faqs, cta } = data;
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [openStepIndex, setOpenStepIndex] = useState<number | null>(0);
-  
+
   // Get the icon component from the map
   const HeroIcon = iconMap[hero.icon] || Shield;
 
@@ -70,7 +72,7 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#08122E] via-[#0b1838] to-[#08122E] px-4 py-12 sm:py-14 md:py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(14,165,107,0.15),transparent_50%)]" />
-        
+
         <div className="relative z-10 mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -126,7 +128,8 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
               Why Choose {hero.industry} Funding?
             </h2>
             <p className="mx-auto max-w-2xl text-base text-gray-600">
-              Specialized financing solutions designed specifically for {hero.industry.toLowerCase()} businesses
+              Specialized financing solutions designed specifically for{" "}
+              {hero.industry.toLowerCase()} businesses
             </p>
           </motion.div>
 
@@ -187,11 +190,13 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
                   onClick={() => toggleStep(index)}
                   className="flex w-full items-center gap-3 p-4 text-left transition-colors hover:bg-gray-50"
                 >
-                  <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-white transition-all ${
-                    openStepIndex === index 
-                      ? 'bg-gradient-to-br from-[#0EA56B] to-[#00b377] scale-110 shadow-lg' 
-                      : 'bg-gradient-to-br from-gray-400 to-gray-500'
-                  }`}>
+                  <div
+                    className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-white transition-all ${
+                      openStepIndex === index
+                        ? "bg-gradient-to-br from-[#0EA56B] to-[#00b377] scale-110 shadow-lg"
+                        : "bg-gradient-to-br from-gray-400 to-gray-500"
+                    }`}
+                  >
                     {index + 1}
                   </div>
                   <h3 className="flex-1 pr-3 text-base font-bold text-[#08122E]">
@@ -202,14 +207,16 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
                     transition={{ duration: 0.3 }}
                     className="flex-shrink-0"
                   >
-                    <ChevronDown 
+                    <ChevronDown
                       className={`h-5 w-5 transition-colors ${
-                        openStepIndex === index ? 'text-[#0EA56B]' : 'text-gray-400'
-                      }`} 
+                        openStepIndex === index
+                          ? "text-[#0EA56B]"
+                          : "text-gray-400"
+                      }`}
                     />
                   </motion.div>
                 </button>
-                
+
                 <AnimatePresence>
                   {openStepIndex === index && (
                     <motion.div
@@ -300,7 +307,9 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
             <h2 className="mb-4 text-3xl font-bold text-[#08122E] sm:text-4xl">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-gray-600">Click on any question to see the answer</p>
+            <p className="text-lg text-gray-600">
+              Click on any question to see the answer
+            </p>
           </motion.div>
 
           <div className="space-y-4">
@@ -317,11 +326,13 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
                   onClick={() => toggleFaq(index)}
                   className="flex w-full items-center gap-4 p-5 text-left transition-colors hover:bg-gray-50 sm:p-6"
                 >
-                  <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-base font-bold transition-all ${
-                    openFaqIndex === index 
-                      ? 'bg-gradient-to-br from-[#0EA56B] to-[#00b377] text-white scale-110 shadow-lg' 
-                      : 'bg-gray-100 text-gray-500'
-                  }`}>
+                  <div
+                    className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-base font-bold transition-all ${
+                      openFaqIndex === index
+                        ? "bg-gradient-to-br from-[#0EA56B] to-[#00b377] text-white scale-110 shadow-lg"
+                        : "bg-gray-100 text-gray-500"
+                    }`}
+                  >
                     Q
                   </div>
                   <h3 className="flex-1 pr-4 text-base font-bold text-[#08122E] sm:text-lg">
@@ -332,14 +343,16 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
                     transition={{ duration: 0.3 }}
                     className="flex-shrink-0"
                   >
-                    <ChevronDown 
+                    <ChevronDown
                       className={`h-6 w-6 transition-colors ${
-                        openFaqIndex === index ? 'text-[#0EA56B]' : 'text-gray-400'
-                      }`} 
+                        openFaqIndex === index
+                          ? "text-[#0EA56B]"
+                          : "text-gray-400"
+                      }`}
                     />
                   </motion.div>
                 </button>
-                
+
                 <AnimatePresence>
                   {openFaqIndex === index && (
                     <motion.div
@@ -375,7 +388,8 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
               Still Have Questions?
             </h3>
             <p className="mb-6 text-gray-300">
-              Our funding specialists are here to help you find the perfect financing solution
+              Our funding specialists are here to help you find the perfect
+              financing solution
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
@@ -399,7 +413,7 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
       {/* CTA Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#08122E] via-[#0b1838] to-[#08122E] px-4 py-12 sm:py-14">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(14,165,107,0.15),transparent_50%)]" />
-        
+
         <div className="relative z-10 mx-auto max-w-3xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -409,9 +423,7 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
             <h2 className="mb-3 text-2xl font-bold text-white sm:text-3xl">
               {cta.title}
             </h2>
-            <p className="mb-6 text-base text-gray-300">
-              {cta.description}
-            </p>
+            <p className="mb-6 text-base text-gray-300">{cta.description}</p>
 
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
@@ -424,7 +436,9 @@ export default function IndustryLandingPage({ data }: IndustryLandingPageProps) 
 
               <div className="flex items-center gap-1.5 text-gray-300">
                 <Shield className="h-4 w-4 text-[#0EA56B]" />
-                <span className="text-xs">No obligation • Soft credit pull</span>
+                <span className="text-xs">
+                  No obligation • Soft credit pull
+                </span>
               </div>
             </div>
           </motion.div>

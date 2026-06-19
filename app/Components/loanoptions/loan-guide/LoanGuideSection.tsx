@@ -67,7 +67,7 @@ export default function LoanGuideSection() {
                 whileHover={{
                   y: -5,
                   scale: 1.01,
-                  boxShadow: "0 15px 35px rgba(15, 23, 42, 0.08)"
+                  boxShadow: "0 15px 35px rgba(15, 23, 42, 0.08)",
                 }}
                 className="
                   group
@@ -88,7 +88,7 @@ export default function LoanGuideSection() {
                 "
               >
                 {/* Hover Glow */}
-                <motion.div 
+                <motion.div
                   className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(16,185,129,0.04),transparent_40%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}

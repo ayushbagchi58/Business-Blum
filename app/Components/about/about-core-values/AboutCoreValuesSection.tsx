@@ -79,16 +79,17 @@ export default function AboutCoreValuesSection() {
                 whileHover={{
                   y: -5,
                   boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
-                  scale: 1.02
+                  scale: 1.02,
                 }}
                 className="rounded-[16px] border border-black/5 bg-gradient-to-br from-white via-white to-gray-50 p-3 shadow-[0_6px_20px_rgba(0,0,0,0.04)] transition-all duration-300 sm:p-4 md:p-5"
               >
-                <motion.div 
+                <motion.div
                   className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#12A56B]/10 to-[#12A56B]/5 shadow-sm sm:h-11 sm:w-11 md:h-12 md:w-12"
-                  whileHover={{ 
-                    scale: 1.15, 
+                  whileHover={{
+                    scale: 1.15,
                     rotate: 10,
-                    background: "linear-gradient(to bottom right, rgba(18, 165, 107, 0.15), rgba(18, 165, 107, 0.08))"
+                    background:
+                      "linear-gradient(to bottom right, rgba(18, 165, 107, 0.15), rgba(18, 165, 107, 0.08))",
                   }}
                   transition={{ duration: 0.3 }}
                 >

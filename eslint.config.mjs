@@ -14,6 +14,14 @@ const eslintConfig = defineConfig([
     },
     rules: {
       "prettier/prettier": "error",
+      "react/no-unescaped-entities": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
     },
   },
 

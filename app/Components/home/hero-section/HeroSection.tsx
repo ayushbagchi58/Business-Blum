@@ -78,12 +78,12 @@ const HeroSection = () => {
           {heroData.buttons.map((button) => (
             <motion.button
               key={button.id}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.03,
                 y: -2,
-                boxShadow: button.primary 
-                  ? "0 20px 40px rgba(0, 153, 102, 0.3)" 
-                  : "0 20px 40px rgba(8, 18, 46, 0.3)"
+                boxShadow: button.primary
+                  ? "0 20px 40px rgba(0, 153, 102, 0.3)"
+                  : "0 20px 40px rgba(8, 18, 46, 0.3)",
               }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.2 }}
@@ -94,7 +94,12 @@ const HeroSection = () => {
               }`}
             >
               <span className="relative z-10">{button.title}</span>
-              {button.icon && <ArrowRight size={18} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />}
+              {button.icon && (
+                <ArrowRight
+                  size={18}
+                  className="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+                />
+              )}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0"
                 initial={{ x: "-100%" }}
@@ -113,15 +118,15 @@ const HeroSection = () => {
         >
           <div className="flex flex-col items-center justify-center gap-5 sm:flex-row sm:flex-wrap sm:gap-8 lg:gap-12">
             {heroData.features.map((feature, idx) => (
-              <motion.div 
-                key={feature.id} 
+              <motion.div
+                key={feature.id}
                 className="flex items-center gap-3"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 + idx * 0.1 }}
                 whileHover={{ scale: 1.05, x: 5 }}
               >
-                <motion.div 
+                <motion.div
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#009966] to-[#00b377] text-white shadow-lg"
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}

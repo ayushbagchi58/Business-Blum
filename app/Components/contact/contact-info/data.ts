@@ -12,7 +12,7 @@ export const contactInfoSectionData: ContactInfoSectionData = {
     {
       id: 2,
       title: "Email",
-      value: "hello@businessblum.com",
+      value: "admin@businessblum.com",
       description: "We respond within 24 hours",
       icon: "mail",
     },

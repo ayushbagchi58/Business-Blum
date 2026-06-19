@@ -35,7 +35,10 @@ export default function ApplyNowHeroSection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(44, 230, 161, 0.3)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 30px rgba(44, 230, 161, 0.3)",
+              }}
               className="
                 inline-flex items-center gap-2
                 rounded-lg border border-white/15

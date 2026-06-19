@@ -55,10 +55,14 @@ export default function AboutDifferentSection() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -4, boxShadow: "0 15px 35px rgba(0,0,0,0.08)", scale: 1.01 }}
+                whileHover={{
+                  y: -4,
+                  boxShadow: "0 15px 35px rgba(0,0,0,0.08)",
+                  scale: 1.01,
+                }}
                 className="flex items-start gap-3 rounded-[16px] border border-black/5 bg-gradient-to-br from-white to-gray-50 p-4 shadow-[0_5px_18px_rgba(0,0,0,0.04)] sm:gap-4 sm:p-5"
               >
-                <motion.div 
+                <motion.div
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#0EA56B] to-[#00b377] shadow-md sm:h-11 sm:w-11"
                   whileHover={{ scale: 1.15, rotate: 10 }}
                   transition={{ duration: 0.3 }}

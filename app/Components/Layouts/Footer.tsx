@@ -25,7 +25,10 @@ export default function Footer() {
               </div>
 
               <p className="mt-4 text-[9px] leading-4 text-slate-300 sm:text-[11px] sm:leading-5 md:text-xs lg:text-sm lg:leading-6">
-                Institutional-grade capital matching platform connecting enterprises with strategic lending partners. We facilitate eligibility assessment and optimal financing solutions for sophisticated business requirements.
+                Institutional-grade capital matching platform connecting
+                enterprises with strategic lending partners. We facilitate
+                eligibility assessment and optimal financing solutions for
+                sophisticated business requirements.
               </p>
             </div>
 
@@ -185,7 +188,7 @@ export default function Footer() {
                   <Mail className="mt-0.5 h-3 w-3 flex-shrink-0 text-emerald-400 sm:h-4 sm:w-4" />
 
                   <p className="break-all text-[8px] text-slate-200 sm:text-[10px] md:text-xs lg:text-sm">
-                    hello@businessblum.com
+                    admin@businessblum.com
                   </p>
                 </div>
 
@@ -193,9 +196,7 @@ export default function Footer() {
                   <MapPin className="mt-0.5 h-3 w-3 flex-shrink-0 text-emerald-400 sm:h-4 sm:w-4" />
 
                   <p className="text-[8px] leading-4 text-slate-200 sm:text-[10px] sm:leading-5 md:text-xs lg:text-sm lg:leading-6">
-                    123 Financial Blvd
-                    <br />
-                    New York, NY
+                    250 west 50th street Suite 10J <br /> Zip code: 10019
                   </p>
                 </div>
               </div>

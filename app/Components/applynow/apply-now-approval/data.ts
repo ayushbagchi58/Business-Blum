@@ -12,8 +12,9 @@ import { ApplyNowApprovalSectionData } from "./types";
 export const applyNowApprovalSectionData: ApplyNowApprovalSectionData = {
   badge: "Platform Performance Metrics",
   heading: "What Helps You Get Approved Faster",
-  subtitle: "87% approval rate • $125K average funding • AI-powered matching analyzing 200+ data points",
-  
+  subtitle:
+    "87% approval rate • $125K average funding • AI-powered matching analyzing 200+ data points",
+
   successMetrics: [
     {
       id: 1,

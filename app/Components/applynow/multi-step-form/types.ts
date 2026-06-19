@@ -20,7 +20,7 @@ export interface FormData {
 
   // Step 4: Documentation (file uploads)
   bankStatements?: File[];
-  
+
   // Consent
   creditAuthorization: boolean;
   contactConsent: boolean;

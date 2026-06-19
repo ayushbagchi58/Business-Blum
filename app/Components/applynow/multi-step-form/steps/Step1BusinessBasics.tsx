@@ -103,10 +103,16 @@ export default function Step1BusinessBasics({
           >
             <option value="">Select your industry</option>
             <option value="Construction">Construction</option>
-            <option value="Trucking & Transportation">Trucking & Transportation</option>
-            <option value="Restaurant & Food Service">Restaurant & Food Service</option>
+            <option value="Trucking & Transportation">
+              Trucking & Transportation
+            </option>
+            <option value="Restaurant & Food Service">
+              Restaurant & Food Service
+            </option>
             <option value="Healthcare & Medical">Healthcare & Medical</option>
-            <option value="Auto Repair & Services">Auto Repair & Services</option>
+            <option value="Auto Repair & Services">
+              Auto Repair & Services
+            </option>
             <option value="Retail">Retail</option>
             <option value="Manufacturing">Manufacturing</option>
             <option value="Professional Services">Professional Services</option>
@@ -151,8 +157,11 @@ export default function Step1BusinessBasics({
         {/* Trust Message */}
         <div className="mt-6 rounded-xl bg-gradient-to-br from-[#0EA56B]/10 to-[#0EA56B]/5 p-4">
           <p className="text-xs text-gray-700">
-            <span className="font-semibold text-[#0EA56B]">✓ Soft Pull Only</span> - 
-            This won't affect your credit score. We match you with the best lenders for your situation.
+            <span className="font-semibold text-[#0EA56B]">
+              ✓ Soft Pull Only
+            </span>{" "}
+            - This won't affect your credit score. We match you with the best
+            lenders for your situation.
           </p>
         </div>
 

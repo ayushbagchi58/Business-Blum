@@ -59,9 +59,12 @@ export default function PlatformMetricsSection() {
     <section className="relative w-full overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 py-16 sm:py-20 lg:py-24">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        ></div>
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -88,7 +91,8 @@ export default function PlatformMetricsSection() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
-            AI-driven capital matching platform processing millions in funding applications daily
+            AI-driven capital matching platform processing millions in funding
+            applications daily
           </p>
         </motion.div>
 
@@ -154,18 +158,23 @@ export default function PlatformMetricsSection() {
                 Powered by Advanced AI & Machine Learning
               </h3>
               <p className="text-sm text-slate-300 sm:text-base">
-                Our proprietary matching algorithm analyzes 200+ data points to connect businesses with optimal lending partners in real-time
+                Our proprietary matching algorithm analyzes 200+ data points to
+                connect businesses with optimal lending partners in real-time
               </p>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 lg:flex-nowrap">
               <div className="flex items-center gap-2 rounded-lg bg-white/5 px-4 py-2">
                 <div className="h-2 w-2 rounded-full bg-cyan-400"></div>
-                <span className="text-sm font-medium text-white">AI-Powered</span>
+                <span className="text-sm font-medium text-white">
+                  AI-Powered
+                </span>
               </div>
               <div className="flex items-center gap-2 rounded-lg bg-white/5 px-4 py-2">
                 <div className="h-2 w-2 rounded-full bg-emerald-400"></div>
-                <span className="text-sm font-medium text-white">Real-Time</span>
+                <span className="text-sm font-medium text-white">
+                  Real-Time
+                </span>
               </div>
               <div className="flex items-center gap-2 rounded-lg bg-white/5 px-4 py-2">
                 <div className="h-2 w-2 rounded-full bg-violet-400"></div>

@@ -40,9 +40,7 @@ export default function PartnerLogos() {
               className="group relative flex items-center justify-center overflow-hidden rounded-xl border-2 border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-[#009966] hover:shadow-xl sm:p-6"
             >
               {/* Text Content - Shows by default */}
-              <motion.div
-                className="flex flex-col items-center justify-center transition-all duration-500 group-hover:opacity-0 group-hover:scale-90"
-              >
+              <motion.div className="flex flex-col items-center justify-center transition-all duration-500 group-hover:opacity-0 group-hover:scale-90">
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
@@ -73,7 +71,7 @@ export default function PartnerLogos() {
                   onError={(e) => {
                     // If image fails to load, keep showing text
                     const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
+                    target.style.display = "none";
                   }}
                 />
               </motion.div>
@@ -90,7 +88,8 @@ export default function PartnerLogos() {
           className="mt-8 text-center sm:mt-12"
         >
           <p className="text-xs text-gray-500 sm:text-sm">
-            Partnering with industry-leading financial institutions to bring you the best funding options
+            Partnering with industry-leading financial institutions to bring you
+            the best funding options
           </p>
         </motion.div>
       </div>

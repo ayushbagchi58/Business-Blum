@@ -18,7 +18,9 @@ export default function Step2ContactInfo({
       className="rounded-2xl bg-white p-6 shadow-lg sm:p-8"
     >
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-[#08122E]">Contact Information</h2>
+        <h2 className="text-2xl font-bold text-[#08122E]">
+          Contact Information
+        </h2>
         <p className="mt-2 text-sm text-gray-600">
           How can we reach you with your funding options?
         </p>
@@ -154,8 +156,11 @@ export default function Step2ContactInfo({
         {/* Trust Message */}
         <div className="mt-6 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100/50 p-4">
           <p className="text-xs text-gray-700">
-            <span className="font-semibold text-blue-600">🔒 Your Privacy Matters</span> - 
-            We never sell your information. You'll only hear from lenders we match you with.
+            <span className="font-semibold text-blue-600">
+              🔒 Your Privacy Matters
+            </span>{" "}
+            - We never sell your information. You'll only hear from lenders we
+            match you with.
           </p>
         </div>
 

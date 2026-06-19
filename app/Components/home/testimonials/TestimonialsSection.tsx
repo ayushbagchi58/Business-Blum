@@ -49,7 +49,7 @@ export default function TestimonialsSection() {
               whileHover={{
                 y: -8,
                 boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)",
-                scale: 1.02
+                scale: 1.02,
               }}
               className="group rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-emerald-200"
             >
@@ -59,12 +59,13 @@ export default function TestimonialsSection() {
                     key={i}
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.15 + i * 0.05, duration: 0.3 }}
+                    transition={{
+                      delay: index * 0.15 + i * 0.05,
+                      duration: 0.3,
+                    }}
                     viewport={{ once: true }}
                   >
-                    <Star
-                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                    />
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   </motion.div>
                 ))}
               </div>

@@ -1,7 +1,8 @@
 import { HeroDataType } from "./types";
 
 export const heroData: HeroDataType = {
-  badge: "Trusted by 50,000+ Businesses Nationwide • $2.4B+ Capital Facilitated",
+  badge:
+    "Trusted by 50,000+ Businesses Nationwide • $2.4B+ Capital Facilitated",
 
   title: {
     first: "AI-Powered Capital Solutions for",

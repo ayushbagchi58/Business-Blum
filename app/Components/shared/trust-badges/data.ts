@@ -37,7 +37,8 @@ export const trustBadgesData: TrustBadgesData = {
 
 export const partnerLogosData: PartnerLogosData = {
   title: "Partnered with Premier Institutional Lenders Nationwide",
-  subtitle: "Strategic relationships with 200+ institutional-grade lending partners",
+  subtitle:
+    "Strategic relationships with 200+ institutional-grade lending partners",
   partners: [
     {
       id: 1,

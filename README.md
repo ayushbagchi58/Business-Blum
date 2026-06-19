@@ -2,8 +2,7 @@
 
 A modern business funding platform built with Next.js, TypeScript, Tailwind CSS, and Framer Motion created by Ayush Bagchi.
 
-GitHub Profile: https://github.com/ayushbagchi58
----
+## GitHub Profile: https://github.com/ayushbagchi58
 
 ## Features
 

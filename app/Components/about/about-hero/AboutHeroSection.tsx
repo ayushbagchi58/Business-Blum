@@ -33,7 +33,7 @@ export default function AboutHeroSection() {
         }}
         className="absolute -left-20 bottom-0 h-[350px] w-[350px] rounded-full bg-gradient-to-tr from-emerald-500/20 to-green-500/20 blur-3xl"
       />
-      
+
       <div className="absolute inset-0 overflow-hidden">
         {glowOrbs.map((orb) => (
           <motion.div
@@ -86,7 +86,10 @@ export default function AboutHeroSection() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(16, 185, 129, 0.2)" }}
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0 20px 40px rgba(16, 185, 129, 0.2)",
+          }}
           transition={{
             duration: 0.4,
             delay: 0.25,

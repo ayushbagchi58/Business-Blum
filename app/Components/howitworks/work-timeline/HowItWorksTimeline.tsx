@@ -53,7 +53,11 @@ export default function HowItWorksTimeline() {
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ y: -8, scale: 1.02, boxShadow: "0 20px 40px rgba(0, 0, 0, 0.12)" }}
+                  whileHover={{
+                    y: -8,
+                    scale: 1.02,
+                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.12)",
+                  }}
                   transition={{ duration: 0.3 }}
                   className={`
                     rounded-xl bg-gradient-to-br from-white to-gray-50 p-5 shadow-lg
@@ -71,7 +75,7 @@ export default function HowItWorksTimeline() {
                     ${index === 0 ? "-translate-y-20 lg:-translate-y-20" : ""}
                   `}
                 >
-                  <motion.div 
+                  <motion.div
                     className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-[#dff7ec] to-[#c8f0dd] shadow-sm"
                     whileHover={{ scale: 1.15, rotate: 10 }}
                     transition={{ duration: 0.3 }}

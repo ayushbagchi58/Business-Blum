@@ -56,7 +56,7 @@ export default function Step4Documentation({
     const k = 1024;
     const sizes = ["Bytes", "KB", "MB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + " " + sizes[i];
+    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
   };
 
   return (
@@ -68,7 +68,8 @@ export default function Step4Documentation({
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-[#08122E]">Documentation</h2>
         <p className="mt-2 text-sm text-gray-600">
-          Upload your bank statements to speed up approval (optional but recommended)
+          Upload your bank statements to speed up approval (optional but
+          recommended)
         </p>
       </div>
 
@@ -114,7 +115,9 @@ export default function Step4Documentation({
         {/* Uploaded Files List */}
         {uploadedFiles.length > 0 && (
           <div className="space-y-2">
-            <p className="text-sm font-semibold text-[#08122E]">Uploaded Files:</p>
+            <p className="text-sm font-semibold text-[#08122E]">
+              Uploaded Files:
+            </p>
             {uploadedFiles.map((file, index) => (
               <div
                 key={index}
@@ -123,8 +126,12 @@ export default function Step4Documentation({
                 <div className="flex items-center gap-3">
                   <FileText className="h-5 w-5 text-[#0EA56B]" />
                   <div>
-                    <p className="text-sm font-medium text-[#08122E]">{file.name}</p>
-                    <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                    <p className="text-sm font-medium text-[#08122E]">
+                      {file.name}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {formatFileSize(file.size)}
+                    </p>
                   </div>
                 </div>
                 <button
@@ -181,8 +188,8 @@ export default function Step4Documentation({
                 className="mt-1 h-4 w-4 accent-[#0EA56B]"
               />
               <span className="text-xs text-gray-700">
-                I authorize a soft credit inquiry to match me with the best lenders. 
-                This will NOT affect my credit score.
+                I authorize a soft credit inquiry to match me with the best
+                lenders. This will NOT affect my credit score.
               </span>
             </label>
             {errors.creditAuthorization && (
@@ -203,7 +210,7 @@ export default function Step4Documentation({
                 className="mt-1 h-4 w-4 accent-[#0EA56B]"
               />
               <span className="text-xs text-gray-700">
-                I agree to be contacted by lenders matched to my application via 
+                I agree to be contacted by lenders matched to my application via
                 phone, email, or SMS about funding options.
               </span>
             </label>
@@ -224,8 +231,8 @@ export default function Step4Documentation({
                 You're almost done!
               </p>
               <p className="mt-1 text-xs text-gray-700">
-                Submit your application and get matched with lenders within 24 hours. 
-                We'll contact you with your personalized funding options.
+                Submit your application and get matched with lenders within 24
+                hours. We'll contact you with your personalized funding options.
               </p>
             </div>
           </div>

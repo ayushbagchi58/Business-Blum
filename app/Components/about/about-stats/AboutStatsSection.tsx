@@ -63,7 +63,7 @@ export default function AboutStatsSection() {
             }}
             className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-emerald-500/20 to-transparent blur-2xl"
           />
-          
+
           <div className="relative z-10 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-6 md:gap-y-0">
             {stats.map((item, index) => (
               <motion.div
@@ -79,7 +79,7 @@ export default function AboutStatsSection() {
                 whileHover={{ y: -5, scale: 1.05 }}
                 className="group flex min-w-0 flex-col items-center text-center"
               >
-                <motion.h2 
+                <motion.h2
                   className="whitespace-nowrap text-[28px] font-black tracking-tight text-[#00A36C] transition-all duration-300 group-hover:text-[#00d084] sm:text-[34px] md:text-[38px] lg:text-[44px]"
                   whileHover={{ scale: 1.1 }}
                 >

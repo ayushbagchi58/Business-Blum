@@ -33,7 +33,7 @@ export default function HowItWorksHero() {
         }}
         className="absolute -left-20 bottom-0 h-[350px] w-[350px] rounded-full bg-gradient-to-tr from-blue-500/20 to-transparent blur-3xl"
       />
-      
+
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.18),transparent_55%)]" />
 
       <motion.div

@@ -1,10 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shield, Lock, CheckCircle, Clock, Award, FileCheck } from "lucide-react";
+import {
+  Shield,
+  Lock,
+  CheckCircle,
+  Clock,
+  Award,
+  FileCheck,
+} from "lucide-react";
 import { trustBadgesData } from "./data";
 
-const iconMap: Record<number, any> = {
+interface IconMapType {
+  [key: number]: React.ComponentType<{ className?: string }>;
+}
+
+const iconMap: IconMapType = {
   1: Award,
   2: Lock,
   3: Shield,

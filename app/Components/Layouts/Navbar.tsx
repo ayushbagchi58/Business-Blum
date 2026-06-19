@@ -51,18 +51,19 @@ const Navbar = () => {
             Loan Options
           </Link>
 
-          <div 
+          <div
             className="relative"
             onMouseEnter={() => setIndustriesDropdownOpen(true)}
             onMouseLeave={() => setIndustriesDropdownOpen(false)}
           >
-            <button
-              className="flex items-center gap-1 text-[14px] font-medium text-[#374151] transition-colors duration-200 hover:text-[#009966] lg:text-[15px]"
-            >
+            <button className="flex items-center gap-1 text-[14px] font-medium text-[#374151] transition-colors duration-200 hover:text-[#009966] lg:text-[15px]">
               Industries
-              <ChevronDown size={16} className={`transition-transform duration-200 ${industriesDropdownOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-200 ${industriesDropdownOpen ? "rotate-180" : ""}`}
+              />
             </button>
-            
+
             {industriesDropdownOpen && (
               <div className="absolute top-full left-0 mt-2 w-64 rounded-lg bg-white shadow-xl border border-gray-100 py-2 animate-fade-in">
                 <Link
@@ -135,6 +136,13 @@ const Navbar = () => {
 
         <div className="flex items-center gap-3">
           <Link
+            href="/login"
+            className="hidden text-[14px] font-medium text-[#374151] transition-colors duration-200 hover:text-[#009966] md:block lg:text-[15px]"
+          >
+            Log In
+          </Link>
+
+          <Link
             href="/applynow"
             className="group relative hidden overflow-hidden rounded-lg bg-gradient-to-r from-[#009966] to-[#00b377] px-4 py-2 text-[13px] font-semibold text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/30 md:block lg:px-5 lg:py-2.5 lg:text-[14px]"
           >
@@ -180,9 +188,12 @@ const Navbar = () => {
               className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-[15px] font-medium text-[#374151] transition hover:bg-gray-50 hover:text-[#009966]"
             >
               Industries
-              <ChevronDown size={16} className={`transition-transform duration-200 ${mobileIndustriesOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                size={16}
+                className={`transition-transform duration-200 ${mobileIndustriesOpen ? "rotate-180" : ""}`}
+              />
             </button>
-            
+
             {mobileIndustriesOpen && (
               <div className="ml-4 mt-1 flex flex-col border-l-2 border-gray-200 pl-2">
                 <Link
@@ -281,6 +292,14 @@ const Navbar = () => {
             onClick={() => setMobileMenuOpen(false)}
           >
             Contact
+          </Link>
+
+          <Link
+            href="/login"
+            className="rounded-lg px-4 py-3 text-[15px] font-medium text-[#374151] transition hover:bg-gray-50 hover:text-[#009966]"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Log In
           </Link>
 
           <Link

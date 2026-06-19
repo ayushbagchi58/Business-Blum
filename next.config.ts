@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "upload.wikimedia.org",
       },
-
     ],
   },
   // Optimize CSS handling for Tailwind v4

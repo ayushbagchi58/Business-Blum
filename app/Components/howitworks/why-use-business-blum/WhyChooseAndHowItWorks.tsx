@@ -40,11 +40,11 @@ export default function WhyChooseAndHowItWorks() {
                 whileHover={{
                   y: -10,
                   scale: 1.03,
-                  boxShadow: "0 25px 50px rgba(0, 0, 0, 0.12)"
+                  boxShadow: "0 25px 50px rgba(0, 0, 0, 0.12)",
                 }}
                 className="group rounded-[18px] bg-gradient-to-br from-white via-white to-gray-50 px-3 py-5 text-center shadow-[0_6px_20px_rgba(0,0,0,0.05)] sm:px-4 sm:py-6 md:px-5 md:py-7 lg:px-6 lg:py-8"
               >
-                <motion.div 
+                <motion.div
                   className="mx-auto flex h-[52px] w-[52px] items-center justify-center rounded-[14px] bg-gradient-to-br from-[#dff5e8] to-[#c8f0dd] shadow-md sm:h-[60px] sm:w-[60px] md:h-[68px] md:w-[68px]"
                   whileHover={{ scale: 1.15, rotate: 10 }}
                   transition={{ duration: 0.3 }}

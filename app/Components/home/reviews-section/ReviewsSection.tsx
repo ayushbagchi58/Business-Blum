@@ -5,7 +5,8 @@ import { Star, CheckCircle, TrendingUp } from "lucide-react";
 import { reviewsSectionData } from "./data";
 
 export default function ReviewsSection() {
-  const { badge, title, subtitle, reviewSources, detailedReviews } = reviewsSectionData;
+  const { badge, title, subtitle, reviewSources, detailedReviews } =
+    reviewsSectionData;
 
   return (
     <section className="relative overflow-hidden bg-white py-16 sm:py-20 md:py-24">
@@ -132,13 +133,11 @@ export default function ReviewsSection() {
 
               {/* Reviewer Info */}
               <div className="flex items-center gap-3 border-t border-gray-100 pt-4">
-                <img
-                  src={review.image}
-                  alt={review.name}
-                  className="h-12 w-12 rounded-full object-cover"
-                />
+                <div className="h-12 w-12 rounded-full bg-gray-200" />
                 <div className="flex-grow">
-                  <p className="text-sm font-bold text-[#08122E]">{review.name}</p>
+                  <p className="text-sm font-bold text-[#08122E]">
+                    {review.name}
+                  </p>
                   <p className="text-xs text-gray-600">{review.role}</p>
                   <p className="text-xs text-gray-500">{review.location}</p>
                 </div>

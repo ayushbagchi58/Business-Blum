@@ -84,13 +84,13 @@ export default function FundingCarousel() {
                       whileHover={{
                         y: -6,
                         boxShadow: "0 20px 40px rgba(0, 0, 0, 0.12)",
-                        scale: 1.02
+                        scale: 1.02,
                       }}
                       className="group relative min-h-[170px] overflow-hidden rounded-[16px] border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-3 shadow-sm transition-all duration-300 sm:min-h-[190px] sm:p-4 md:p-5"
                     >
                       <div className="absolute left-0 top-0 h-[3px] w-full bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500 bg-[length:200%_100%] animate-[shimmer_3s_ease-in-out_infinite]"></div>
 
-                      <motion.div 
+                      <motion.div
                         className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-100 to-emerald-50 shadow-sm sm:h-11 sm:w-11"
                         whileHover={{ scale: 1.15, rotate: 10 }}
                         transition={{ duration: 0.3 }}
