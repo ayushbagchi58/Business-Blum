@@ -1,12 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle } from "lucide-react";
+import { toast } from "sonner";
 import Step1BusinessBasics from "./steps/Step1BusinessBasics";
 import Step2ContactInfo from "./steps/Step2ContactInfo";
 import Step3BusinessDetails from "./steps/Step3BusinessDetails";
 import Step4Documentation from "./steps/Step4Documentation";
+import LoadingScreen from "../LoadingScreen";
 import { FormData } from "./types";
 
 const steps = [
@@ -17,7 +20,9 @@ const steps = [
 ];
 
 export default function MultiStepForm() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     fundingAmount: "",
     monthlyRevenue: "",
@@ -28,6 +33,8 @@ export default function MultiStepForm() {
     email: "",
     phoneNumber: "",
     businessName: "",
+    password: "",
+    confirmPassword: "",
     ein: "",
     businessAddress: "",
     businessEntityType: "",
@@ -39,7 +46,7 @@ export default function MultiStepForm() {
 
   const updateFormData = (data: Partial<FormData>) => {
     setFormData((prev) => ({ ...prev, ...data }));
-    // Clear errors for updated fields
+
     const updatedFields = Object.keys(data);
     setErrors((prev) => {
       const newErrors = { ...prev };
@@ -66,6 +73,25 @@ export default function MultiStepForm() {
         newErrors.email = "Invalid email";
       if (!formData.phoneNumber) newErrors.phoneNumber = "Required";
       if (!formData.businessName) newErrors.businessName = "Required";
+
+      // Password validation
+      if (!formData.password) {
+        newErrors.password = "Required";
+      } else if (formData.password.length < 8) {
+        newErrors.password = "Password must be at least 8 characters";
+      } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
+        newErrors.password = "Must include uppercase, lowercase, and number";
+      }
+
+      // Confirm Password validation
+      if (!formData.confirmPassword) {
+        newErrors.confirmPassword = "Required";
+      } else if (
+        formData.password &&
+        formData.password !== formData.confirmPassword
+      ) {
+        newErrors.confirmPassword = "Passwords do not match";
+      }
     }
 
     if (step === 3) {
@@ -89,7 +115,6 @@ export default function MultiStepForm() {
     if (validateStep(currentStep)) {
       if (currentStep < 4) {
         setCurrentStep(currentStep + 1);
-        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         handleSubmit();
       }
@@ -99,128 +124,147 @@ export default function MultiStepForm() {
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const handleSubmit = () => {
     console.log("Form submitted:", formData);
-    // Here you would send the data to your backend
-    alert(
-      "Application submitted successfully! We'll contact you within 24 hours."
-    );
+
+    // Show success toast notification
+    toast.success("Application Submitted Successfully!", {
+      description:
+        "We're processing your application and will contact you within 24 hours.",
+      duration: 3000,
+    });
+
+    // Show loading screen after a brief delay
+    setTimeout(() => {
+      setShowLoadingScreen(true);
+    }, 500);
+  };
+
+  const handleLoadingComplete = () => {
+    // Redirect to dashboard
+    router.push("/dashboard");
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-12 sm:py-16">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        {/* Progress Indicator */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            {steps.map((step, index) => (
-              <div key={step.id} className="flex flex-1 flex-col items-center">
-                <div className="relative flex w-full items-center">
-                  {/* Circle */}
-                  <div
-                    className={`relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all ${
-                      currentStep > step.id
-                        ? "border-[#0EA56B] bg-[#0EA56B]"
-                        : currentStep === step.id
-                          ? "border-[#0EA56B] bg-white"
-                          : "border-gray-300 bg-white"
-                    }`}
-                  >
-                    {currentStep > step.id ? (
-                      <CheckCircle className="h-6 w-6 text-white" />
-                    ) : (
-                      <span
-                        className={`text-sm font-semibold ${
-                          currentStep === step.id
-                            ? "text-[#0EA56B]"
-                            : "text-gray-400"
+    <>
+      {/* Loading Screen Overlay */}
+      <AnimatePresence>
+        {showLoadingScreen && (
+          <LoadingScreen onComplete={handleLoadingComplete} />
+        )}
+      </AnimatePresence>
+
+      <section className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-12 sm:py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <div className="flex items-center justify-between">
+              {steps.map((step, index) => (
+                <div
+                  key={step.id}
+                  className="flex flex-1 flex-col items-center"
+                >
+                  <div className="relative flex w-full items-center">
+                    <div
+                      className={`relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all ${
+                        currentStep > step.id
+                          ? "border-[#0EA56B] bg-[#0EA56B]"
+                          : currentStep === step.id
+                            ? "border-[#0EA56B] bg-white"
+                            : "border-gray-300 bg-white"
+                      }`}
+                    >
+                      {currentStep > step.id ? (
+                        <CheckCircle className="h-6 w-6 text-white" />
+                      ) : (
+                        <span
+                          className={`text-sm font-semibold ${
+                            currentStep === step.id
+                              ? "text-[#0EA56B]"
+                              : "text-gray-400"
+                          }`}
+                        >
+                          {step.id}
+                        </span>
+                      )}
+                    </div>
+
+                    {index < steps.length - 1 && (
+                      <div
+                        className={`h-0.5 w-full transition-all ${
+                          currentStep > step.id ? "bg-[#0EA56B]" : "bg-gray-300"
                         }`}
-                      >
-                        {step.id}
-                      </span>
+                      />
                     )}
                   </div>
 
-                  {/* Line */}
-                  {index < steps.length - 1 && (
-                    <div
-                      className={`h-0.5 w-full transition-all ${
-                        currentStep > step.id ? "bg-[#0EA56B]" : "bg-gray-300"
+                  <div className="mt-2 hidden text-center sm:block">
+                    <p
+                      className={`text-xs font-semibold ${
+                        currentStep >= step.id
+                          ? "text-[#08122E]"
+                          : "text-gray-400"
                       }`}
-                    />
-                  )}
+                    >
+                      {step.name}
+                    </p>
+                    <p className="text-xs text-gray-500">{step.description}</p>
+                  </div>
                 </div>
-
-                {/* Label */}
-                <div className="mt-2 hidden text-center sm:block">
-                  <p
-                    className={`text-xs font-semibold ${
-                      currentStep >= step.id
-                        ? "text-[#08122E]"
-                        : "text-gray-400"
-                    }`}
-                  >
-                    {step.name}
-                  </p>
-                  <p className="text-xs text-gray-500">{step.description}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Form Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentStep}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            {currentStep === 1 && (
-              <Step1BusinessBasics
-                formData={formData}
-                updateFormData={updateFormData}
-                onNext={handleNext}
-                onBack={handleBack}
-                errors={errors}
-              />
-            )}
-            {currentStep === 2 && (
-              <Step2ContactInfo
-                formData={formData}
-                updateFormData={updateFormData}
-                onNext={handleNext}
-                onBack={handleBack}
-                errors={errors}
-              />
-            )}
-            {currentStep === 3 && (
-              <Step3BusinessDetails
-                formData={formData}
-                updateFormData={updateFormData}
-                onNext={handleNext}
-                onBack={handleBack}
-                errors={errors}
-              />
-            )}
-            {currentStep === 4 && (
-              <Step4Documentation
-                formData={formData}
-                updateFormData={updateFormData}
-                onNext={handleNext}
-                onBack={handleBack}
-                errors={errors}
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </section>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {currentStep === 1 && (
+                <Step1BusinessBasics
+                  formData={formData}
+                  updateFormData={updateFormData}
+                  onNext={handleNext}
+                  onBack={handleBack}
+                  errors={errors}
+                />
+              )}
+              {currentStep === 2 && (
+                <Step2ContactInfo
+                  formData={formData}
+                  updateFormData={updateFormData}
+                  onNext={handleNext}
+                  onBack={handleBack}
+                  errors={errors}
+                />
+              )}
+              {currentStep === 3 && (
+                <Step3BusinessDetails
+                  formData={formData}
+                  updateFormData={updateFormData}
+                  onNext={handleNext}
+                  onBack={handleBack}
+                  errors={errors}
+                />
+              )}
+              {currentStep === 4 && (
+                <Step4Documentation
+                  formData={formData}
+                  updateFormData={updateFormData}
+                  onNext={handleNext}
+                  onBack={handleBack}
+                  errors={errors}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+    </>
   );
 }

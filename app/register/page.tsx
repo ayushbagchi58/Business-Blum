@@ -1,5 +1,14 @@
-import { RegisterForm } from "../Components/auth/register";
+import {
+  AuthLayout,
+  RegisterForm,
+  registerTestimonial,
+  authStats,
+} from "../Components/auth";
 
 export default function RegisterPage() {
-  return <RegisterForm />;
+  return (
+    <AuthLayout testimonial={registerTestimonial} stats={authStats}>
+      <RegisterForm />
+    </AuthLayout>
+  );
 }

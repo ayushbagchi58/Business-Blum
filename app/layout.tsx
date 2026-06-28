@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Navbar from "./Components/Layouts/Navbar";
-import Footer from "./Components/Layouts/Footer";
+import ConditionalLayout from "./Components/Layouts/ConditionalLayout";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Business Blum",
@@ -19,11 +19,19 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <Navbar />
-        {children}
-        <footer>
-          <Footer />
-        </footer>
+        <ConditionalLayout>{children}</ConditionalLayout>
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          toastOptions={{
+            style: {
+              background: "white",
+              border: "1px solid #e5e7eb",
+            },
+            className: "sonner-toast",
+          }}
+        />
       </body>
     </html>
   );

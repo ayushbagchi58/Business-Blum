@@ -9,9 +9,18 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "upload.wikimedia.org",
+        hostname: "companieslogo.com",
+      },
+      {
+        protocol: "https",
+        hostname: "1000logos.net",
+      },
+      {
+        protocol: "https",
+        hostname: "www.google.com",
       },
     ],
+    unoptimized: false,
   },
   // Optimize CSS handling for Tailwind v4
   experimental: {

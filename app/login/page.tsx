@@ -1,5 +1,14 @@
-import { LoginForm } from "../Components/auth/login";
+import {
+  AuthLayout,
+  LoginForm,
+  loginTestimonial,
+  authStats,
+} from "../Components/auth";
 
 export default function LoginPage() {
-  return <LoginForm />;
+  return (
+    <AuthLayout testimonial={loginTestimonial} stats={authStats}>
+      <LoginForm />
+    </AuthLayout>
+  );
 }

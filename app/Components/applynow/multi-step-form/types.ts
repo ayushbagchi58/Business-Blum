@@ -11,6 +11,8 @@ export interface FormData {
   email: string;
   phoneNumber: string;
   businessName: string;
+  password: string;
+  confirmPassword: string;
 
   // Step 3: Business Details
   ein: string;
@@ -20,6 +22,13 @@ export interface FormData {
 
   // Step 4: Documentation (file uploads)
   bankStatements?: File[];
+  governmentId?: File[];
+  voidedCheck?: File[];
+  businessLicense?: File[];
+  profitLossStatements?: File[];
+  businessTaxReturns?: File[];
+  articlesOfIncorporation?: File[];
+  invoicesContracts?: File[];
 
   // Consent
   creditAuthorization: boolean;
