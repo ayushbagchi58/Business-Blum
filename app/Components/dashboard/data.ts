@@ -57,11 +57,17 @@ export const dashboardData: DashboardData = {
     id: 1,
     advisorName: "James Okafor",
     advisorTitle: "Your Advisor",
-    advisorImage: "/avatars/advisor-avatar.jpg", // Placeholder
+    advisorImage: "/avatars/advisor-avatar.jpg",
     message:
       "Your documents look great. Clearfield Capital has pre-approved you for $100k. Want to review the terms together?",
   },
   newOffersCount: 3,
+  applicationStatus: {
+    hasActiveApplication: true,
+    canReapply: true,
+    lastApplicationDate: "June 18, 2024",
+    applicationId: "APP-2024-001",
+  },
 };
 
 export { applicationsData };

@@ -2,22 +2,36 @@
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { DashboardData } from "./types";
+import { ApplySection } from "./apply-section";
 
 interface OverviewTabProps {
   data: DashboardData;
 }
 
 export default function OverviewTab({ data }: OverviewTabProps) {
+  const router = useRouter();
+
+  const handleApplyClick = () => {
+    // Navigate to apply now page and scroll to form
+    router.push("/applynow#application-form");
+  };
+
   return (
     <div className="space-y-6">
-      {/* Welcome Section */}
+      {/* Greeting */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">{data.greeting}</h1>
         <p className="mt-1 text-sm text-gray-600">{data.statusMessage}</p>
       </div>
 
-      {/* Application Progress Card */}
+      {/* Apply/Reapply Section */}
+      <ApplySection
+        status={data.applicationStatus}
+        onApplyClick={handleApplyClick}
+      />
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -32,7 +46,6 @@ export default function OverviewTab({ data }: OverviewTabProps) {
         <div className="space-y-4">
           {data.applicationProgress.map((step, index) => (
             <div key={step.id} className="flex items-start gap-4">
-              {/* Icon */}
               <div className="relative">
                 <div
                   className={`flex h-8 w-8 items-center justify-center rounded-full ${
@@ -47,7 +60,7 @@ export default function OverviewTab({ data }: OverviewTabProps) {
                     <span className="text-xs font-semibold">{index + 1}</span>
                   )}
                 </div>
-                {/* Connecting Line */}
+
                 {index < data.applicationProgress.length - 1 && (
                   <div
                     className={`absolute left-1/2 top-8 h-8 w-0.5 -translate-x-1/2 ${
@@ -59,7 +72,6 @@ export default function OverviewTab({ data }: OverviewTabProps) {
                 )}
               </div>
 
-              {/* Content */}
               <div className="flex flex-1 items-center justify-between pb-2">
                 <span
                   className={`text-sm font-medium ${
@@ -85,7 +97,6 @@ export default function OverviewTab({ data }: OverviewTabProps) {
         </div>
       </motion.div>
 
-      {/* Available Offers Card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -130,7 +141,6 @@ export default function OverviewTab({ data }: OverviewTabProps) {
         </div>
       </motion.div>
 
-      {/* Advisor Message Card */}
       {data.advisorMessage && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -139,12 +149,10 @@ export default function OverviewTab({ data }: OverviewTabProps) {
           className="rounded-xl bg-[#e8f5f0] p-6 shadow-sm"
         >
           <div className="flex gap-4">
-            {/* Avatar */}
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#0EA56B] text-lg font-semibold text-white">
               {data.advisorMessage.advisorName.charAt(0)}
             </div>
 
-            {/* Message Content */}
             <div className="flex-1">
               <div className="mb-2">
                 <h3 className="text-sm font-semibold text-gray-900">

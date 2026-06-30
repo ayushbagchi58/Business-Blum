@@ -36,4 +36,10 @@ export interface DashboardData {
   availableOffers: Offer[];
   advisorMessage: AdvisorMessage | null;
   newOffersCount: number;
+  applicationStatus: {
+    hasActiveApplication: boolean;
+    canReapply: boolean;
+    lastApplicationDate?: string;
+    applicationId?: string;
+  };
 }

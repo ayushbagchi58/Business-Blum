@@ -1,74 +1,58 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Upload, FileText, CheckCircle2, AlertCircle, X } from "lucide-react";
+import { Upload, FileText, CheckCircle2, X } from "lucide-react";
 import { useState } from "react";
 import { StepProps } from "../types";
 
-interface DocumentType {
-  key: keyof Pick<
-    StepProps["formData"],
-    | "bankStatements"
-    | "governmentId"
-    | "voidedCheck"
-    | "businessLicense"
-    | "profitLossStatements"
-    | "businessTaxReturns"
-    | "articlesOfIncorporation"
-    | "invoicesContracts"
-  >;
-  label: string;
-  description: string;
-  required: boolean;
-}
-
-const REQUIRED_DOCUMENTS: DocumentType[] = [
+// Document type definitions
+const REQUIRED_DOCUMENTS = [
   {
-    key: "bankStatements",
-    label: "3-6 months of business bank statements",
-    description: "PDF, JPG, or PNG format",
+    key: "bankStatements" as const,
+    label: "Business Bank Statements",
+    description: "3-6 months of business bank statements",
     required: true,
   },
   {
-    key: "governmentId",
-    label: "Government-issued ID or driver license",
-    description: "Clear photo of valid ID",
+    key: "governmentId" as const,
+    label: "Government-Issued ID",
+    description: "Driver's license or government-issued ID",
     required: true,
   },
   {
-    key: "voidedCheck",
-    label: "Voided business check",
-    description: "Photo or PDF of voided check",
-    required: true,
-  },
-  {
-    key: "businessLicense",
-    label: "Business license",
-    description: "If applicable to your business",
+    key: "voidedCheck" as const,
+    label: "Voided Business Check",
+    description: "A voided check from your business account",
     required: false,
   },
   {
-    key: "profitLossStatements",
-    label: "Profit & Loss statements",
-    description: "Recent financial statements",
-    required: true,
-  },
-  {
-    key: "businessTaxReturns",
-    label: "Business tax returns",
-    description: "Some programs require this",
+    key: "businessLicense" as const,
+    label: "Business License",
+    description: "If applicable to your business type",
     required: false,
   },
   {
-    key: "articlesOfIncorporation",
+    key: "profitLossStatements" as const,
+    label: "Profit & Loss Statements",
+    description: "Recent P&L statements for your business",
+    required: false,
+  },
+  {
+    key: "businessTaxReturns" as const,
+    label: "Business Tax Returns",
+    description: "Required for some funding programs",
+    required: false,
+  },
+  {
+    key: "articlesOfIncorporation" as const,
     label: "Articles of Incorporation",
     description: "Business formation documents",
-    required: true,
+    required: false,
   },
   {
-    key: "invoicesContracts",
-    label: "Invoices or contracts",
-    description: "If applicable to your application",
+    key: "invoicesContracts" as const,
+    label: "Invoices or Contracts",
+    description: "If applicable to your business",
     required: false,
   },
 ];
@@ -81,25 +65,55 @@ export default function Step4Documentation({
   errors,
 }: StepProps) {
   const [uploadedDocs, setUploadedDocs] = useState<Record<string, File[]>>({});
+  const [dragActiveKey, setDragActiveKey] = useState<string | null>(null);
 
-  const handleFileChange = (docKey: string, files: FileList | null) => {
-    if (!files) return;
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    docKey: string
+  ) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      const newDocs = {
+        ...uploadedDocs,
+        [docKey]: [...(uploadedDocs[docKey] || []), ...files],
+      };
+      setUploadedDocs(newDocs);
+      updateFormData({ [docKey]: newDocs[docKey] });
+    }
+  };
 
-    const fileArray = Array.from(files);
-    const newDocs = { ...uploadedDocs, [docKey]: fileArray };
-    setUploadedDocs(newDocs);
-    updateFormData({ [docKey]: fileArray });
+  const handleDrag = (e: React.DragEvent, docKey: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActiveKey(docKey);
+    } else if (e.type === "dragleave") {
+      setDragActiveKey(null);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent, docKey: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActiveKey(null);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const files = Array.from(e.dataTransfer.files);
+      const newDocs = {
+        ...uploadedDocs,
+        [docKey]: [...(uploadedDocs[docKey] || []), ...files],
+      };
+      setUploadedDocs(newDocs);
+      updateFormData({ [docKey]: newDocs[docKey] });
+    }
   };
 
   const removeFile = (docKey: string, fileIndex: number) => {
     const currentFiles = uploadedDocs[docKey] || [];
     const newFiles = currentFiles.filter((_, i) => i !== fileIndex);
-
     const newDocs = { ...uploadedDocs, [docKey]: newFiles };
     setUploadedDocs(newDocs);
-    updateFormData({
-      [docKey]: newFiles.length > 0 ? newFiles : undefined,
-    });
+    updateFormData({ [docKey]: newFiles.length > 0 ? newFiles : undefined });
   };
 
   const formatFileSize = (bytes: number) => {
@@ -112,16 +126,8 @@ export default function Step4Documentation({
 
   const allRequiredDocsUploaded = () => {
     return REQUIRED_DOCUMENTS.filter((doc) => doc.required).every(
-      (doc) => uploadedDocs[doc.key]?.length > 0
+      (doc) => uploadedDocs[doc.key] && uploadedDocs[doc.key].length > 0
     );
-  };
-
-  const handleSubmit = () => {
-    if (!allRequiredDocsUploaded()) {
-      alert("Please upload all required documents before submitting.");
-      return;
-    }
-    onNext();
   };
 
   return (
@@ -139,66 +145,81 @@ export default function Step4Documentation({
 
       <div className="space-y-6">
         <div className="rounded-xl bg-blue-50 p-4">
-          <div className="flex gap-3">
-            <AlertCircle className="h-5 w-5 flex-shrink-0 text-blue-600" />
-            <div>
-              <p className="text-sm font-semibold text-[#08122E]">
-                Required Documents
-              </p>
-              <p className="mt-1 text-xs text-gray-700">
-                All documents marked with * are required for application
-                submission
-              </p>
-            </div>
-          </div>
+          <p className="text-sm font-semibold text-[#08122E] mb-2">
+            Required Documents:
+          </p>
+          <ul className="space-y-1 text-xs text-gray-700">
+            {REQUIRED_DOCUMENTS.filter((doc) => doc.required).map((doc) => (
+              <li key={doc.key} className="flex items-start gap-2">
+                <span className="text-[#0EA56B] font-bold">•</span>
+                <span>
+                  <strong>{doc.label}</strong> - {doc.description}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs text-gray-600 italic">
+            Optional documents (if applicable): Voided Business Check, Business
+            License, Profit & Loss Statements, Business Tax Returns, Articles of
+            Incorporation, Invoices or Contracts
+          </p>
         </div>
 
         {REQUIRED_DOCUMENTS.map((doc) => (
-          <div
-            key={doc.key}
-            className="border-b border-gray-200 pb-5 last:border-0"
-          >
-            <div className="mb-3">
-              <label className="flex items-center gap-2 text-sm font-semibold text-[#08122E]">
+          <div key={doc.key} className="space-y-2">
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-semibold text-[#08122E]">
                 {doc.label}
-                {doc.required && <span className="text-red-500">*</span>}
+                {doc.required && <span className="text-red-500 ml-1">*</span>}
               </label>
-              <p className="mt-1 text-xs text-gray-500">{doc.description}</p>
+              {uploadedDocs[doc.key] && uploadedDocs[doc.key].length > 0 && (
+                <CheckCircle2 className="h-4 w-4 text-[#0EA56B]" />
+              )}
             </div>
+            <p className="text-xs text-gray-600">{doc.description}</p>
 
-            <div className="relative">
+            <div
+              onDragEnter={(e) => handleDrag(e, doc.key)}
+              onDragLeave={(e) => handleDrag(e, doc.key)}
+              onDragOver={(e) => handleDrag(e, doc.key)}
+              onDrop={(e) => handleDrop(e, doc.key)}
+              className={`
+                relative rounded-lg border-2 border-dashed
+                p-4 text-center transition-all duration-300
+                ${
+                  dragActiveKey === doc.key
+                    ? "border-[#0EA56B] bg-[#0EA56B]/5"
+                    : "border-gray-300 bg-gray-50"
+                }
+              `}
+            >
               <input
                 type="file"
                 multiple
                 accept=".pdf,.jpg,.jpeg,.png"
-                onChange={(e) => handleFileChange(doc.key, e.target.files)}
-                className="absolute inset-0 h-full w-full cursor-pointer opacity-0 z-10"
-                id={`upload-${doc.key}`}
+                onChange={(e) => handleFileChange(e, doc.key)}
+                className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
               />
-              <div className="flex items-center gap-3 rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-4 transition-colors hover:border-[#0EA56B] hover:bg-[#0EA56B]/5">
-                <Upload className="h-5 w-5 text-gray-400" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-700">
-                    Click to upload or drag and drop
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    PDF, JPG, PNG (max 10MB each)
-                  </p>
-                </div>
+              <div className="pointer-events-none">
+                <Upload className="mx-auto h-8 w-8 text-gray-400" />
+                <p className="mt-2 text-xs font-semibold text-[#08122E]">
+                  Click to upload or drag and drop
+                </p>
+                <p className="mt-1 text-xs text-gray-500">PDF, JPG, PNG</p>
               </div>
             </div>
 
-            {uploadedDocs[doc.key]?.length > 0 && (
-              <div className="mt-3 space-y-2">
+            {uploadedDocs[doc.key] && uploadedDocs[doc.key].length > 0 && (
+              <div className="space-y-2">
                 {uploadedDocs[doc.key].map((file, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3"
+                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 p-2"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
                       <FileText className="h-4 w-4 text-[#0EA56B]" />
                       <div>
-                        <p className="text-sm font-medium text-[#08122E]">
+                        <p className="text-xs font-medium text-[#08122E]">
                           {file.name}
                         </p>
                         <p className="text-xs text-gray-500">
@@ -208,7 +229,8 @@ export default function Step4Documentation({
                     </div>
                     <button
                       onClick={() => removeFile(doc.key, index)}
-                      className="rounded-full p-1 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-500"
+                      className="text-red-500 hover:text-red-700 p-1"
+                      type="button"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -270,7 +292,7 @@ export default function Step4Documentation({
             <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-[#0EA56B]" />
             <div>
               <p className="text-sm font-semibold text-[#08122E]">
-                Almost done!
+                You're almost done!
               </p>
               <p className="mt-1 text-xs text-gray-700">
                 {allRequiredDocsUploaded()
@@ -284,14 +306,29 @@ export default function Step4Documentation({
         <div className="mt-6 flex gap-3">
           <button
             onClick={onBack}
-            className="flex h-12 flex-1 items-center justify-center rounded-xl border-2 border-gray-300 bg-white text-sm font-semibold text-gray-700 transition-all duration-300 hover:border-gray-400 hover:bg-gray-50"
+            className="
+              flex h-12 flex-1 items-center justify-center
+              rounded-xl border-2 border-gray-300 bg-white
+              text-sm font-semibold text-gray-700
+              transition-all duration-300
+              hover:border-gray-400 hover:bg-gray-50
+            "
           >
             Back
           </button>
           <button
-            onClick={handleSubmit}
+            onClick={onNext}
             disabled={!allRequiredDocsUploaded()}
-            className="flex h-12 flex-1 items-center justify-center rounded-xl bg-[#0EA56B] text-sm font-semibold text-white shadow-lg shadow-[#0EA56B]/25 transition-all duration-300 hover:bg-[#0c9461] hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            className={`
+              flex h-12 flex-1 items-center justify-center
+              rounded-xl text-sm font-semibold text-white
+              shadow-lg transition-all duration-300
+              ${
+                allRequiredDocsUploaded()
+                  ? "bg-[#0EA56B] shadow-[#0EA56B]/25 hover:bg-[#0c9461] hover:shadow-xl cursor-pointer"
+                  : "bg-gray-300 cursor-not-allowed opacity-60"
+              }
+            `}
           >
             Submit Application
           </button>

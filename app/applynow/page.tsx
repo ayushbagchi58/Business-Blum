@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import {
   ApplyNowApprovalSection,
   ApplyNowHeroSection,
@@ -7,6 +10,18 @@ import { MultiStepForm } from "../Components/applynow/multi-step-form";
 import { TrustBadges } from "../Components/shared/trust-badges";
 
 export default function Page() {
+  useEffect(() => {
+    // Check if there's a hash in the URL and scroll to it
+    if (window.location.hash === "#application-form") {
+      setTimeout(() => {
+        const element = document.getElementById("application-form");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    }
+  }, []);
+
   return (
     <>
       <ApplyNowHeroSection />
@@ -17,7 +32,9 @@ export default function Page() {
         </div>
       </div>
 
-      <MultiStepForm />
+      <div id="application-form">
+        <MultiStepForm />
+      </div>
 
       <ApplyNowProcessSection />
 
