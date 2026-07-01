@@ -30,4 +30,5 @@ export interface Feature {
 export interface ApplySectionProps {
   status: ApplicationStatus;
   onApplyClick: () => void;
+  userName?: string;
 }

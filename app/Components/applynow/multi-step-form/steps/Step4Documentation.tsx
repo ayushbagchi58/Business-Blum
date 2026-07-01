@@ -29,7 +29,7 @@ const REQUIRED_DOCUMENTS = [
     key: "businessLicense" as const,
     label: "Business License",
     description: "If applicable to your business type",
-    required: false,
+    required: true,
   },
   {
     key: "profitLossStatements" as const,
@@ -159,9 +159,9 @@ export default function Step4Documentation({
             ))}
           </ul>
           <p className="mt-3 text-xs text-gray-600 italic">
-            Optional documents (if applicable): Voided Business Check, Business
-            License, Profit & Loss Statements, Business Tax Returns, Articles of
-            Incorporation, Invoices or Contracts
+            Optional documents (if applicable): Voided Business Check, Profit &
+            Loss Statements, Business Tax Returns, Articles of Incorporation,
+            Invoices or Contracts
           </p>
         </div>
 

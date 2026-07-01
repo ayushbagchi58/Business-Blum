@@ -6,12 +6,6 @@ export interface ProfileData {
   phoneNumber: string;
   businessName: string;
 
-  // Business Basics (from Step 1)
-  fundingAmount: string;
-  monthlyRevenue: string;
-  industry: string;
-  timeInBusiness: string;
-
   // Business Details (from Step 3)
   ein: string;
   businessAddress: string;

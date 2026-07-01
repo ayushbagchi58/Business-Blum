@@ -15,13 +15,13 @@ export default function ConditionalLayout({
   const isDashboardRoute = pathname?.startsWith("/dashboard");
   const isAuthRoute =
     pathname?.startsWith("/login") || pathname?.startsWith("/register");
+  const isVerifyEmailRoute = pathname?.startsWith("/verify-email");
 
-  if (isDashboardRoute || isAuthRoute) {
-    // Dashboard and Auth layouts - no navbar/footer
+  if (isDashboardRoute || isAuthRoute || isVerifyEmailRoute) {
+    // Dashboard, Auth, and Verify Email layouts - no navbar/footer
     return <>{children}</>;
   }
 
-  // Regular website layout - with navbar/footer
   return (
     <>
       <Navbar />
