@@ -38,6 +38,11 @@ export default function OverviewTab({ data }: OverviewTabProps) {
     }
   };
 
+  // Remove the Start button from "Create your account" step since user is already logged in
+  const stepsForDashboard = applicationProgressSteps.map((step) =>
+    step.id === 1 ? { ...step, action: undefined } : step
+  );
+
   return (
     <div className="space-y-6">
       <div>
@@ -52,7 +57,7 @@ export default function OverviewTab({ data }: OverviewTabProps) {
       />
 
       <ApplicationProgress
-        steps={applicationProgressSteps}
+        steps={stepsForDashboard}
         onStepAction={handleStepAction}
       />
 

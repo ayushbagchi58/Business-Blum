@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   RefreshCw,
 } from "lucide-react";
-import { toast } from "sonner";
 import { EmailVerificationProps } from "./types";
 import { verificationData } from "./data";
 
@@ -17,14 +16,50 @@ export default function EmailVerification({
   email,
   onVerificationComplete,
   onResendCode,
+  isVerifying: externalIsVerifying,
+  resetTimer,
 }: EmailVerificationProps) {
   const [code, setCode] = useState<string[]>(
     Array(verificationData.codeLength).fill("")
   );
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [isResending, setIsResending] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
+  const [otpExpiry, setOtpExpiry] = useState(600); // 10 minutes = 600 seconds
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // Use external isVerifying if provided, otherwise use internal state
+  const isVerifying = externalIsVerifying ?? false;
+
+  // Reset timer when resetTimer prop changes
+  useEffect(() => {
+    if (resetTimer) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setOtpExpiry(600); // Reset to 10 minutes
+      setCode(Array(verificationData.codeLength).fill(""));
+      inputRefs.current[0]?.focus();
+    }
+  }, [resetTimer]);
+
+  // OTP expiry countdown timer
+  useEffect(() => {
+    if (otpExpiry > 0) {
+      const timer = setTimeout(() => setOtpExpiry(otpExpiry - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [otpExpiry]);
+
+  // Format time as MM:SS
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  // Get color based on time remaining
+  const getTimeColor = (): string => {
+    if (otpExpiry > 300) return "text-green-600"; // > 5 minutes
+    if (otpExpiry > 120) return "text-yellow-600"; // > 2 minutes
+    return "text-red-600"; // < 2 minutes
+  };
 
   // Resend cooldown timer
   useEffect(() => {
@@ -109,48 +144,17 @@ export default function EmailVerification({
   };
 
   const handleVerify = async (verificationCode: string) => {
-    setIsVerifying(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      // Backend integration placeholder
-      console.log("Verifying code:", verificationCode);
-
-      // For demo purposes, accept any 6-digit code
-      toast.success("Email Verified Successfully!", {
-        description: "Your email has been confirmed.",
-        duration: 3000,
-      });
-
-      setIsVerifying(false);
-      onVerificationComplete();
-    }, 1500);
+    // Call the external handler with the OTP code
+    await onVerificationComplete(verificationCode);
   };
 
   const handleResend = () => {
     if (resendCooldown > 0) return;
 
-    setIsResending(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      // Backend integration placeholder
-      console.log("Resending verification code to:", email);
-
-      if (onResendCode) {
-        onResendCode();
-      }
-
-      toast.success("Verification Code Sent!", {
-        description: "Please check your email inbox.",
-        duration: 3000,
-      });
-
-      setIsResending(false);
-      setResendCooldown(verificationData.resendCooldown);
-      setCode(Array(verificationData.codeLength).fill(""));
-      inputRefs.current[0]?.focus();
-    }, 1000);
+    // Call the parent's resend handler (redirects to resend-otp page)
+    if (onResendCode) {
+      onResendCode();
+    }
   };
 
   const getIconComponent = (iconName: string) => {
@@ -173,7 +177,6 @@ export default function EmailVerification({
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
-        {/* Header */}
         <div className="mb-8 text-center">
           <motion.div
             initial={{ scale: 0 }}
@@ -191,11 +194,43 @@ export default function EmailVerification({
             {verificationData.subtitle}
           </p>
           <p className="mt-2 text-sm font-semibold text-[#0EA56B]">{email}</p>
+
+          {/* OTP Expiry Timer */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className={`mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 ${
+              otpExpiry > 300
+                ? "bg-green-50"
+                : otpExpiry > 120
+                  ? "bg-yellow-50"
+                  : "bg-red-50"
+            }`}
+          >
+            <KeyRound
+              className={`h-4 w-4 ${
+                otpExpiry > 300
+                  ? "text-green-600"
+                  : otpExpiry > 120
+                    ? "text-yellow-600"
+                    : "text-red-600"
+              }`}
+            />
+            <span className={`text-sm font-semibold ${getTimeColor()}`}>
+              {otpExpiry > 0 ? (
+                <>
+                  Code expires in:{" "}
+                  <span className="tabular-nums">{formatTime(otpExpiry)}</span>
+                </>
+              ) : (
+                "Code expired - Please resend"
+              )}
+            </span>
+          </motion.div>
         </div>
 
-        {/* Verification Card */}
         <div className="rounded-2xl bg-white p-8 shadow-lg">
-          {/* OTP Input */}
           <div className="mb-6">
             <label className="mb-3 block text-center text-sm font-medium text-gray-700">
               Enter Verification Code
@@ -224,16 +259,35 @@ export default function EmailVerification({
             </div>
           </div>
 
-          {/* Verify Button */}
+          {otpExpiry === 0 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="mb-4 flex items-center gap-2 rounded-lg bg-red-50 border border-red-200 px-4 py-3"
+            >
+              <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
+              <p className="text-sm text-red-700">
+                Your verification code has expired. Please request a new code.
+              </p>
+            </motion.div>
+          )}
+
           <button
             onClick={() => handleVerify(code.join(""))}
-            disabled={code.some((digit) => !digit) || isVerifying}
+            disabled={
+              code.some((digit) => !digit) || isVerifying || otpExpiry === 0
+            }
             className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#0EA56B] text-sm font-semibold text-white transition-all hover:bg-[#0c9461] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isVerifying ? (
               <>
                 <RefreshCw className="h-4 w-4 animate-spin" />
                 Verifying...
+              </>
+            ) : otpExpiry === 0 ? (
+              <>
+                <AlertCircle className="h-4 w-4" />
+                Code Expired
               </>
             ) : (
               <>
@@ -243,7 +297,6 @@ export default function EmailVerification({
             )}
           </button>
 
-          {/* Resend Code */}
           <div className="mt-4 text-center">
             <p className="text-sm text-gray-600">
               Didn't receive the code?{" "}
@@ -254,16 +307,14 @@ export default function EmailVerification({
               ) : (
                 <button
                   onClick={handleResend}
-                  disabled={isResending}
-                  className="font-semibold text-[#0EA56B] transition-colors hover:text-[#0c9461] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="font-semibold text-[#0EA56B] transition-colors hover:text-[#0c9461]"
                 >
-                  {isResending ? "Sending..." : "Resend Code"}
+                  Resend Code
                 </button>
               )}
             </p>
           </div>
 
-          {/* Instructions */}
           <div className="mt-6 space-y-3 rounded-xl bg-blue-50 p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
               Verification Tips
@@ -277,7 +328,6 @@ export default function EmailVerification({
           </div>
         </div>
 
-        {/* Footer */}
         <p className="mt-6 text-center text-xs text-gray-500">
           Having trouble? Contact our{" "}
           <a

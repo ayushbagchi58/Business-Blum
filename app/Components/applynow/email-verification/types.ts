@@ -1,7 +1,9 @@
 export interface EmailVerificationProps {
   email: string;
-  onVerificationComplete: () => void;
+  onVerificationComplete: (otp: string) => void | Promise<void>;
   onResendCode?: () => void;
+  isVerifying?: boolean;
+  resetTimer?: boolean;
 }
 
 export interface VerificationData {

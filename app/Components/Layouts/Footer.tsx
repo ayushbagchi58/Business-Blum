@@ -175,7 +175,7 @@ export default function Footer() {
 
                   <div className="min-w-0">
                     <p className="truncate text-[8px] font-medium sm:text-[10px] md:text-xs lg:text-sm">
-                      (800) 555-BLUM
+                      (+1) 9803611860
                     </p>
 
                     <p className="mt-1 text-[7px] text-slate-400 sm:text-[9px] md:text-[10px]">
@@ -196,7 +196,8 @@ export default function Footer() {
                   <MapPin className="mt-0.5 h-3 w-3 flex-shrink-0 text-emerald-400 sm:h-4 sm:w-4" />
 
                   <p className="text-[8px] leading-4 text-slate-200 sm:text-[10px] sm:leading-5 md:text-xs lg:text-sm lg:leading-6">
-                    250 west 50th street Suite 10J <br /> Zip code: 10019
+                    7703 Kelburn lane, <br />
+                    North Carolina Charlotte
                   </p>
                 </div>
               </div>

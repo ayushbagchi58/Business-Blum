@@ -14,23 +14,19 @@ export default function ApplicationProgress({
       animate={{ opacity: 1, y: 0 }}
       className="rounded-xl bg-white p-6 shadow-sm"
     >
-      {/* Header */}
       <div className="mb-6">
         <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
           Getting Started
         </h2>
       </div>
 
-      {/* Steps */}
       <div className="space-y-4">
         {steps.map((step) => (
           <div
             key={step.id}
             className="flex items-center justify-between border-b border-gray-100 pb-4 last:border-0 last:pb-0"
           >
-            {/* Left: Number/Check + Content */}
             <div className="flex items-center gap-4">
-              {/* Step Number or Checkmark */}
               <div
                 className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full ${
                   step.status === "completed"
@@ -45,7 +41,6 @@ export default function ApplicationProgress({
                 )}
               </div>
 
-              {/* Title and Subtitle */}
               <div>
                 <h3 className="text-base font-semibold text-gray-900">
                   {step.title}
@@ -54,7 +49,6 @@ export default function ApplicationProgress({
               </div>
             </div>
 
-            {/* Right: Action Button or Pending Badge */}
             <div className="flex-shrink-0">
               {step.action ? (
                 <button
@@ -64,11 +58,11 @@ export default function ApplicationProgress({
                   {step.action}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>
-              ) : (
+              ) : step.status === "pending" ? (
                 <span className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-500">
                   Pending
                 </span>
-              )}
+              ) : null}
             </div>
           </div>
         ))}

@@ -4,16 +4,21 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Eye, EyeOff, Check } from "lucide-react";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { RegisterFormData } from "./types";
+import { useRegister } from "@/hooks/useAuth";
+import { syncSessionToCookies } from "@/lib/sessionSync";
 
 export default function RegisterForm() {
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
+  const registerMutation = useRegister();
   const [formData, setFormData] = useState<RegisterFormData>({
-    fullName: "",
+    legal_name: "",
+    first_name: "",
+    last_name: "",
     email: "",
-    password: "",
+    phone_number: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -27,8 +32,16 @@ export default function RegisterForm() {
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.fullName) {
-      newErrors.fullName = "Full name is required";
+    if (!formData.legal_name) {
+      newErrors.legal_name = "Legal name is required";
+    }
+
+    if (!formData.first_name) {
+      newErrors.first_name = "First name is required";
+    }
+
+    if (!formData.last_name) {
+      newErrors.last_name = "Last name is required";
     }
 
     if (!formData.email) {
@@ -37,10 +50,10 @@ export default function RegisterForm() {
       newErrors.email = "Invalid email format";
     }
 
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-    } else if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
+    if (!formData.phone_number) {
+      newErrors.phone_number = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.phone_number.replace(/\D/g, ""))) {
+      newErrors.phone_number = "Invalid phone number (10 digits required)";
     }
 
     setErrors(newErrors);
@@ -52,23 +65,60 @@ export default function RegisterForm() {
     // Backend integration placeholder
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log("Register form submitted:", formData);
-      // Backend integration placeholder
-      // For now, redirect to dashboard
-      router.push("/dashboard");
+      try {
+        const response = await registerMutation.mutateAsync(formData);
+
+        if (response.success && response.data) {
+          // Store user_id in sessionStorage for OTP verification
+          // The API uses owner_id field primarily
+          const userId =
+            response.data.owner.owner_id || response.data.owner.uid;
+
+          console.log("✅ Registration Response:");
+          console.log("  Full Response:", response);
+          console.log("  Owner ID:", userId);
+          console.log("  Email:", formData.email);
+
+          if (!userId) {
+            console.error("❌ Could not extract user ID from response");
+            toast.error(
+              "Registration succeeded but session setup failed. Please try logging in."
+            );
+            return;
+          }
+
+          if (typeof window !== "undefined") {
+            sessionStorage.setItem("temp_user_id", userId);
+            sessionStorage.setItem("temp_user_email", formData.email);
+
+            // Sync to cookies immediately for middleware
+            syncSessionToCookies();
+
+            // Verify it was stored
+            const storedUserId = sessionStorage.getItem("temp_user_id");
+            console.log("  Stored User ID:", storedUserId);
+          }
+
+          // Use router.replace instead of router.push to prevent back navigation
+          router.replace(
+            `/verify-registration?email=${encodeURIComponent(formData.email)}&uid=${encodeURIComponent(userId)}`
+          );
+        }
+      } catch (error) {
+        // Error is already handled by the mutation's onError
+        console.error("Registration error:", error);
+      }
     }
   };
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-gray-50 px-4 py-12">
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="mb-8 text-center">
-          {/* Step Indicator */}
           <div className="mb-4 flex items-center justify-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0EA56B] text-sm font-semibold text-white">
               <Check className="h-4 w-4" />
@@ -88,10 +138,8 @@ export default function RegisterForm() {
           </p>
         </div>
 
-        {/* Form Card */}
         <div className="rounded-2xl bg-white p-8 shadow-sm">
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Google Sign Up */}
             <button
               type="button"
               onClick={handleGoogleSignUp}
@@ -106,7 +154,6 @@ export default function RegisterForm() {
               Sign up with Google
             </button>
 
-            {/* Divider */}
             <div className="flex items-center gap-4">
               <div className="h-px flex-1 bg-gray-200" />
               <span className="text-xs font-medium uppercase text-gray-400">
@@ -115,33 +162,71 @@ export default function RegisterForm() {
               <div className="h-px flex-1 bg-gray-200" />
             </div>
 
-            {/* Full Name */}
             <div>
               <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-gray-500">
-                Full Name
+                Legal Name
               </label>
               <input
                 type="text"
-                placeholder="Maria Gonzalez"
-                value={formData.fullName}
-                onChange={(e) => handleInputChange("fullName", e.target.value)}
+                placeholder="AyushBagchi"
+                value={formData.legal_name}
+                onChange={(e) =>
+                  handleInputChange("legal_name", e.target.value)
+                }
                 className={`h-12 w-full rounded-xl border bg-white px-4 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-[#0EA56B] focus:ring-4 focus:ring-[#0EA56B]/10 ${
-                  errors.fullName ? "border-red-400" : "border-gray-300"
+                  errors.legal_name ? "border-red-400" : "border-gray-300"
                 }`}
               />
-              {errors.fullName && (
-                <p className="mt-1 text-xs text-red-500">{errors.fullName}</p>
+              {errors.legal_name && (
+                <p className="mt-1 text-xs text-red-500">{errors.legal_name}</p>
               )}
             </div>
 
-            {/* Email */}
+            <div>
+              <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-gray-500">
+                First Name
+              </label>
+              <input
+                type="text"
+                placeholder="Ayush"
+                value={formData.first_name}
+                onChange={(e) =>
+                  handleInputChange("first_name", e.target.value)
+                }
+                className={`h-12 w-full rounded-xl border bg-white px-4 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-[#0EA56B] focus:ring-4 focus:ring-[#0EA56B]/10 ${
+                  errors.first_name ? "border-red-400" : "border-gray-300"
+                }`}
+              />
+              {errors.first_name && (
+                <p className="mt-1 text-xs text-red-500">{errors.first_name}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-gray-500">
+                Last Name
+              </label>
+              <input
+                type="text"
+                placeholder="Bagchi"
+                value={formData.last_name}
+                onChange={(e) => handleInputChange("last_name", e.target.value)}
+                className={`h-12 w-full rounded-xl border bg-white px-4 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-[#0EA56B] focus:ring-4 focus:ring-[#0EA56B]/10 ${
+                  errors.last_name ? "border-red-400" : "border-gray-300"
+                }`}
+              />
+              {errors.last_name && (
+                <p className="mt-1 text-xs text-red-500">{errors.last_name}</p>
+              )}
+            </div>
+
             <div>
               <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-gray-500">
                 Email Address
               </label>
               <input
                 type="email"
-                placeholder="you@company.com"
+                placeholder="ayushbagchi144@gmail.com"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
                 className={`h-12 w-full rounded-xl border bg-white px-4 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-[#0EA56B] focus:ring-4 focus:ring-[#0EA56B]/10 ${
@@ -153,51 +238,47 @@ export default function RegisterForm() {
               )}
             </div>
 
-            {/* Password */}
             <div>
               <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-gray-500">
-                Password
+                Phone Number
               </label>
-              <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Min. 8 characters"
-                  value={formData.password}
-                  onChange={(e) =>
-                    handleInputChange("password", e.target.value)
-                  }
-                  className={`h-12 w-full rounded-xl border bg-white px-4 pr-12 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-[#0EA56B] focus:ring-4 focus:ring-[#0EA56B]/10 ${
-                    errors.password ? "border-red-400" : "border-gray-300"
-                  }`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 transition-colors hover:text-gray-700"
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </button>
-              </div>
-              {errors.password && (
-                <p className="mt-1 text-xs text-red-500">{errors.password}</p>
+              <input
+                type="tel"
+                placeholder="9123990338"
+                value={formData.phone_number}
+                onChange={(e) =>
+                  handleInputChange("phone_number", e.target.value)
+                }
+                className={`h-12 w-full rounded-xl border bg-white px-4 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-[#0EA56B] focus:ring-4 focus:ring-[#0EA56B]/10 ${
+                  errors.phone_number ? "border-red-400" : "border-gray-300"
+                }`}
+              />
+              {errors.phone_number && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.phone_number}
+                </p>
               )}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
-              className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#0EA56B] text-sm font-semibold text-white transition-all hover:bg-[#0c9461]"
+              disabled={registerMutation.isPending}
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#0EA56B] text-sm font-semibold text-white transition-all hover:bg-[#0c9461] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Continue
-              <ArrowRight className="h-4 w-4" />
+              {registerMutation.isPending ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Creating Account...
+                </>
+              ) : (
+                <>
+                  Continue
+                  <ArrowRight className="h-4 w-4" />
+                </>
+              )}
             </button>
           </form>
 
-          {/* Footer */}
           <p className="mt-6 text-center text-sm text-gray-600">
             Already have an account?{" "}
             <Link

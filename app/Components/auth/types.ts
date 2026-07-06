@@ -5,9 +5,11 @@ export interface LoginFormData {
 }
 
 export interface RegisterFormData {
-  fullName: string;
+  legal_name: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  password: string;
+  phone_number: string;
 }
 
 export interface AuthTestimonial {
