@@ -1,0 +1,12 @@
+# Force Redeploy Trigger - 2026-07-08 23:23
+
+This file triggers a fresh deployment on Vercel.
+
+The reset password compatibility page exists at:
+- app/account/reset_password/[token]/page.tsx
+
+It should redirect to:
+- /reset-password?token=<token>
+
+After this deployment, test:
+https://businessblum.com/account/reset_password/test-123
