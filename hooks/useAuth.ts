@@ -18,6 +18,12 @@ import {
   CreatePasswordResponse,
   LoginRequest,
   LoginResponse,
+  ForgotPasswordRequest,
+  ForgotPasswordResponse,
+  ResetPasswordRequest,
+  ResetPasswordResponse,
+  ChangePasswordRequest,
+  ChangePasswordResponse,
 } from "@/types/auth.types";
 import {
   extractErrorMessage,
@@ -162,8 +168,28 @@ export const useLogin = (): UseMutationResult<
     onSuccess: (response) => {
       if (response.success && response.data) {
         // Transform API response to match Redux state
+        // Use the 'id' field from owner_details (database primary key)
+        const userId = response.data.owner_details.id?.toString();
+
+        console.log("🔐 Login Success - User ID Extraction:");
+        console.log(
+          "  owner_details.id (numeric):",
+          response.data.owner_details.id
+        );
+        console.log(
+          "  owner_details.user_id (UUID):",
+          response.data.owner_details.user_id
+        );
+        console.log("  ✅ Using ID:", userId);
+
+        if (!userId) {
+          console.error("❌ ERROR: owner_details.id is undefined!");
+          toast.error("Login error: User ID not found in response");
+          return;
+        }
+
         const user = {
-          id: response.data.owner_details.user_id,
+          id: userId,
           email: response.data.owner_details.email,
           first_name: response.data.owner_details.first_name,
           last_name: response.data.owner_details.last_name,
@@ -171,6 +197,11 @@ export const useLogin = (): UseMutationResult<
           legal_name: response.data.company_details.legal_name,
           is_email_verify: response.data.owner_details.is_email_verify,
         };
+
+        console.log("💾 Storing user in Redux/localStorage:", {
+          ...user,
+          id: userId,
+        });
 
         // Save to Redux store (which also saves to localStorage)
         dispatch(
@@ -227,6 +258,116 @@ export const useLogout = () => {
       dispatch(logout());
       toast.info("You have been logged out");
       router.push("/login");
+    },
+  });
+};
+
+/**
+ * Hook for forgot password - Send reset link
+ */
+export const useForgotPassword = (): UseMutationResult<
+  ApiResponse<ForgotPasswordResponse>,
+  AxiosError<ApiError>,
+  ForgotPasswordRequest
+> => {
+  return useMutation({
+    mutationFn: (data: ForgotPasswordRequest) =>
+      AuthService.forgotPassword(data),
+    onSuccess: (response) => {
+      if (response.success) {
+        const message = extractSuccessMessage(
+          response,
+          "Password reset link sent to your email!"
+        );
+        toast.success(message);
+      }
+    },
+    onError: (error: AxiosError<ApiError>) => {
+      const message = extractErrorMessage(
+        error,
+        "Failed to send reset link. Please try again."
+      );
+      toast.error(message);
+    },
+  });
+};
+
+/**
+ * Hook for reset password with token
+ */
+export const useResetPassword = (): UseMutationResult<
+  ApiResponse<ResetPasswordResponse>,
+  AxiosError<ApiError>,
+  { token: string; data: ResetPasswordRequest }
+> => {
+  return useMutation({
+    mutationFn: ({
+      token,
+      data,
+    }: {
+      token: string;
+      data: ResetPasswordRequest;
+    }) => AuthService.resetPassword(token, data),
+    onSuccess: (response) => {
+      if (response.success) {
+        const message = extractSuccessMessage(
+          response,
+          "Password reset successful!"
+        );
+        toast.success(message);
+      }
+    },
+    onError: (error: AxiosError<ApiError>) => {
+      const message = extractErrorMessage(
+        error,
+        "Failed to reset password. Please try again."
+      );
+      toast.error(message);
+    },
+  });
+};
+
+/**
+ * Hook for change password (logged-in user)
+ */
+export const useChangePassword = (): UseMutationResult<
+  ApiResponse<ChangePasswordResponse>,
+  AxiosError<ApiError>,
+  { userId: string; data: ChangePasswordRequest }
+> => {
+  return useMutation({
+    mutationFn: ({
+      userId,
+      data,
+    }: {
+      userId: string;
+      data: ChangePasswordRequest;
+    }) => AuthService.changePassword(userId, data),
+    onSuccess: (response) => {
+      if (response.success) {
+        console.log("✅ Change Password Success Response:", response);
+        console.log("  API Message:", response.message);
+
+        const message = extractSuccessMessage(
+          response,
+          "Password changed successfully!"
+        );
+
+        console.log("  Toast Message:", message);
+        toast.success(message);
+      }
+    },
+    onError: (error: AxiosError<ApiError>) => {
+      console.log("❌ Change Password Error:", error.response?.data);
+      console.log("  API Error Message:", error.response?.data?.message);
+
+      const message = extractErrorMessage(
+        error,
+        "Failed to change password. Please try again."
+      );
+
+      console.log("  Toast Error Message:", message);
+      toast.error(message);
     },
   });
 };

@@ -26,6 +26,21 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ResetPasswordRequest {
+  password: string;
+  confirm_password: string;
+}
+
+export interface ChangePasswordRequest {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
+}
+
 // Auth Response Types
 export interface ApiResponse<T = unknown> {
   code: number;
@@ -103,8 +118,10 @@ export interface LoginResponse {
     annual_revenue: number | null;
   };
   owner_details: {
+    id: number;
     uid: number;
     user_id: string;
+    owner_id: string;
     first_name: string;
     last_name: string;
     email: string;
@@ -115,6 +132,20 @@ export interface LoginResponse {
     access_token: string;
     refresh_token: string;
   };
+}
+
+export interface ForgotPasswordResponse {
+  message: string;
+}
+
+export interface ResetPasswordResponse {
+  message: string;
+  success: boolean;
+}
+
+export interface ChangePasswordResponse {
+  message: string;
+  success: boolean;
 }
 
 // Auth State Types

@@ -34,6 +34,12 @@ const protectedRoutes: Record<string, ProtectedRoute> = {
     requiredKeys: ["email_verified", "verified_email"],
     redirectTo: "/register",
   },
+  "/reset-password": {
+    // This page allows token-based access only
+    allowWithToken: true,
+    requiredKeys: [],
+    redirectTo: "/forgot-password",
+  },
 };
 
 export function middleware(request: NextRequest) {
@@ -47,9 +53,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // For create-password, check if there's a token in the URL
+  // For create-password and reset-password, check if there's a token in the URL
   if (
-    pathname === "/create-password" &&
+    (pathname === "/create-password" || pathname === "/reset-password") &&
     "allowWithToken" in protectedRoute &&
     protectedRoute.allowWithToken
   ) {
@@ -58,6 +64,7 @@ export function middleware(request: NextRequest) {
       // Has token, allow access (backend will validate the token)
       return NextResponse.next();
     }
+    // No token, will check session below or redirect
   }
 
   // Get session storage data from cookies
@@ -126,6 +133,16 @@ export function middleware(request: NextRequest) {
           new URL(protectedRoute.redirectTo, request.url)
         );
       }
+
+      // For reset-password without token, redirect to forgot-password
+      if (pathname === "/reset-password") {
+        console.log(
+          `⛔ Middleware: No token provided for ${pathname}, redirecting to ${protectedRoute.redirectTo}`
+        );
+        return NextResponse.redirect(
+          new URL(protectedRoute.redirectTo, request.url)
+        );
+      }
     }
 
     // All checks passed, allow access
@@ -141,5 +158,10 @@ export function middleware(request: NextRequest) {
 
 // Configure which routes this middleware should run on
 export const config = {
-  matcher: ["/check-email", "/resend-otp", "/create-password"],
+  matcher: [
+    "/check-email",
+    "/resend-otp",
+    "/create-password",
+    "/reset-password",
+  ],
 };

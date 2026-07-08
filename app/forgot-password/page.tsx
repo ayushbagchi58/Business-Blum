@@ -5,14 +5,30 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import { useForgotPassword } from "@/hooks/useAuth";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const forgotPasswordMutation = useForgotPassword();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+
+    if (!email) {
+      return;
+    }
+
+    try {
+      const response = await forgotPasswordMutation.mutateAsync({ email });
+
+      if (response.success) {
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      // Error toast already shown by hook
+      console.error("❌ Forgot password failed:", error);
+    }
   };
 
   return (
@@ -74,7 +90,8 @@ export default function ForgotPasswordPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
                     required
-                    className="w-full px-3.5 py-2.5 bg-[#f3f4f6] border border-gray-200 rounded-lg text-[14px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-[#009966]"
+                    disabled={forgotPasswordMutation.isPending}
+                    className="w-full px-3.5 py-2.5 bg-[#f3f4f6] border border-gray-200 rounded-lg text-[14px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-200 focus:border-[#009966] disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -82,9 +99,17 @@ export default function ForgotPasswordPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#009966] to-[#00b377] text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                  disabled={forgotPasswordMutation.isPending}
+                  className="w-full bg-gradient-to-r from-[#009966] to-[#00b377] text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  Send reset link
+                  {forgotPasswordMutation.isPending ? (
+                    <>
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send reset link"
+                  )}
                 </motion.button>
               </form>
             </>

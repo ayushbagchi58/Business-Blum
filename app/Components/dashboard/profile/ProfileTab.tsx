@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Edit2, Check, Eye, EyeOff, Lock, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { ProfileData } from "./types";
+import { useChangePassword } from "@/hooks/useAuth";
+import { useAppSelector } from "@/store/hooks";
 
 interface ProfileTabProps {
   initialData: ProfileData;
@@ -51,6 +53,12 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
   const [profileData, setProfileData] = useState<ProfileData>(initialData);
   const [editedData, setEditedData] = useState<ProfileData>(initialData);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  // Get user from Redux store
+  const user = useAppSelector((state) => state.auth.user);
+
+  // Change password hook
+  const changePasswordMutation = useChangePassword();
 
   // Password change states
   const [isChangingPassword, setIsChangingPassword] = useState(false);
@@ -114,9 +122,12 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
     } else if (passwordData.newPassword.length < 8) {
       errors.newPassword = "Password must be at least 8 characters";
     } else if (
-      !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(passwordData.newPassword)
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]/.test(
+        passwordData.newPassword
+      )
     ) {
-      errors.newPassword = "Must include uppercase, lowercase, and number";
+      errors.newPassword =
+        "Must include uppercase, lowercase, number, and special character";
     }
 
     if (!passwordData.confirmPassword) {
@@ -138,31 +149,48 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
     return Object.keys(errors).length === 0;
   };
 
-  const handlePasswordChange = () => {
+  const handlePasswordChange = async () => {
     if (!validatePasswordChange()) return;
 
-    // Backend integration placeholder
-    console.log("Changing password...");
+    // Check if user is logged in and has an id
+    if (!user?.id) {
+      toast.error("User session not found. Please log in again.");
+      return;
+    }
 
-    // Simulate API call
-    setTimeout(() => {
-      toast.success("Password Changed Successfully!", {
-        description: "Your password has been updated.",
-        duration: 3000,
+    console.log("🔑 Change Password - User ID Check:");
+    console.log("  User from Redux:", user);
+    console.log("  User ID being used:", user.id);
+    console.log("  User ID type:", typeof user.id);
+
+    try {
+      const response = await changePasswordMutation.mutateAsync({
+        userId: user.id,
+        data: {
+          old_password: passwordData.currentPassword,
+          new_password: passwordData.newPassword,
+          confirm_password: passwordData.confirmPassword,
+        },
       });
 
-      // Reset password form
-      setIsChangingPassword(false);
-      setPasswordData({
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      });
-      setPasswordErrors({});
-      setShowCurrentPassword(false);
-      setShowNewPassword(false);
-      setShowConfirmPassword(false);
-    }, 500);
+      if (response.success) {
+        // Success message already shown by the hook from API response
+        // Reset password form
+        setIsChangingPassword(false);
+        setPasswordData({
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
+        setPasswordErrors({});
+        setShowCurrentPassword(false);
+        setShowNewPassword(false);
+        setShowConfirmPassword(false);
+      }
+    } catch (error) {
+      // Error message already shown by the hook
+      console.error("❌ Password change failed:", error);
+    }
   };
 
   const handleCancelPasswordChange = () => {
@@ -181,7 +209,21 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
   const getPasswordStrength = (password: string): string => {
     if (password.length === 0) return "";
     if (password.length < 8) return "Weak";
-    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) return "Good";
+
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[@$!%*?&#]/.test(password);
+
+    const strength = [
+      hasUpperCase,
+      hasLowerCase,
+      hasNumber,
+      hasSpecialChar,
+    ].filter(Boolean).length;
+
+    if (strength < 3) return "Weak";
+    if (strength === 3) return "Good";
     return "Strong";
   };
 
@@ -299,7 +341,6 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
           </div>
         </motion.div>
 
-        {/* Security Settings Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -335,7 +376,6 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
             </div>
           ) : (
             <div className="space-y-4">
-              {/* Current Password */}
               <div>
                 <label className="text-xs font-medium uppercase tracking-wide text-gray-500">
                   Current Password <span className="text-red-500">*</span>
@@ -373,7 +413,6 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
                 )}
               </div>
 
-              {/* New Password */}
               <div>
                 <label className="text-xs font-medium uppercase tracking-wide text-gray-500">
                   New Password <span className="text-red-500">*</span>
@@ -416,7 +455,6 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
                 )}
               </div>
 
-              {/* Confirm New Password */}
               <div>
                 <label className="text-xs font-medium uppercase tracking-wide text-gray-500">
                   Confirm New Password <span className="text-red-500">*</span>
@@ -462,41 +500,63 @@ export default function ProfileTab({ initialData }: ProfileTabProps) {
                 )}
               </div>
 
-              {/* Password Requirements */}
               <div className="rounded-lg bg-blue-50 p-3">
                 <p className="mb-2 text-xs font-semibold text-gray-700">
                   Password Requirements:
                 </p>
                 <ul className="space-y-1 text-xs text-gray-600">
                   <li className="flex items-center gap-2">
-                    <div className="h-1 w-1 rounded-full bg-gray-400" />
+                    <div
+                      className={`h-1 w-1 rounded-full ${passwordData.newPassword.length >= 8 ? "bg-[#0EA56B]" : "bg-gray-400"}`}
+                    />
                     At least 8 characters long
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="h-1 w-1 rounded-full bg-gray-400" />
+                    <div
+                      className={`h-1 w-1 rounded-full ${/[A-Z]/.test(passwordData.newPassword) && /[a-z]/.test(passwordData.newPassword) ? "bg-[#0EA56B]" : "bg-gray-400"}`}
+                    />
                     Contains uppercase and lowercase letters
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="h-1 w-1 rounded-full bg-gray-400" />
+                    <div
+                      className={`h-1 w-1 rounded-full ${/\d/.test(passwordData.newPassword) ? "bg-[#0EA56B]" : "bg-gray-400"}`}
+                    />
                     Contains at least one number
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div
+                      className={`h-1 w-1 rounded-full ${/[@$!%*?&#]/.test(passwordData.newPassword) ? "bg-[#0EA56B]" : "bg-gray-400"}`}
+                    />
+                    Contains at least one special character (@$!%*?&#)
                   </li>
                 </ul>
               </div>
 
-              {/* Action Buttons */}
               <div className="flex gap-2 pt-2">
                 <button
                   onClick={handleCancelPasswordChange}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                  disabled={changePasswordMutation.isPending}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handlePasswordChange}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#0EA56B] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0c9461]"
+                  disabled={changePasswordMutation.isPending || !user?.id}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#0EA56B] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0c9461] disabled:cursor-not-allowed disabled:opacity-50"
+                  title={!user?.id ? "User session not found" : ""}
                 >
-                  <Check className="h-4 w-4" />
-                  Update Password
+                  {changePasswordMutation.isPending ? (
+                    <>
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <Check className="h-4 w-4" />
+                      Update Password
+                    </>
+                  )}
                 </button>
               </div>
             </div>

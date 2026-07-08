@@ -1,17 +1,15 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
-// Get base URL from environment variable
-const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+// Get API base URL from environment variable
+const baseURL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.businessblum.com";
 
 console.log("🔧 Axios Configuration:");
-console.log("  baseURL from env:", baseURL);
-
-// Validate base URL
-if (!baseURL) {
-  throw new Error(
-    "❌ NEXT_PUBLIC_API_BASE_URL is not defined in environment variables!"
-  );
-}
+console.log("  baseURL:", baseURL);
+console.log(
+  "  Source:",
+  process.env.NEXT_PUBLIC_API_BASE_URL ? "Environment Variable" : "Fallback"
+);
 
 // Create axios instance with default config
 const axiosInstance = axios.create({
@@ -30,13 +28,16 @@ axiosInstance.interceptors.request.use(
     // Construct full URL for logging
     const fullURL = `${config.baseURL}${config.url}`;
 
-    // Log request details
-    console.log("🌐 Axios Request:");
+    // Log request details with clear formatting
+    console.log("━".repeat(80));
+    console.log("🌐 AXIOS API REQUEST");
+    console.log("━".repeat(80));
     console.log("  Method:", config.method?.toUpperCase());
     console.log("  Base URL:", config.baseURL);
     console.log("  Endpoint:", config.url);
-    console.log("  Full URL:", fullURL);
+    console.log("  ✅ FULL URL:", fullURL);
     console.log("  Data:", config.data);
+    console.log("━".repeat(80));
 
     // Add auth token if exists
     if (typeof window !== "undefined") {
